@@ -15,16 +15,6 @@ class Authentication:
         with open('config.json') as json_data_file:
             self.config = json.load(json_data_file)['config']
 
-    def register(self, email, password):
-        auth = self.firebase.auth()
-        try:
-            auth.create_user_with_email_and_password(email, password)
-            print("Registered successfully")
-        except requests.exceptions.HTTPError as err:
-            error_json = err.args[1]
-            error = json.loads(error_json)['error']
-            print(error['message'])
-
     def signin(self, email, password):
         auth = self.firebase.auth()
         try:
@@ -36,7 +26,19 @@ class Authentication:
             error = json.loads(error_json)['error']
             print(error['message'])
 
+    def register(self, email, password, data):
+        auth = self.firebase.auth()
+        try:
+            auth.create_user_with_email_and_password(email, password)
+            self.createNewUser(email, password, data)
+        except requests.exceptions.HTTPError as err:
+            error_json = err.args[1]
+            error = json.loads(error_json)['error']
+            print(error['message'])
 
-a = Authentication()
-# a.register('test1@gmail.com', 'password1')
-a.signin("test@gmail.com", "test1234")
+    def createNewUser(self, email, password, data):
+        auth = self.firebase.auth()
+        db = self.firebase.database()
+        user = auth.sign_in_with_email_and_password(email, password)
+        uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
+        results = db.child("users").push(data, user['idToken'])

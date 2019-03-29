@@ -53,7 +53,13 @@ class Authentication:
 #         "name": "TestJa",
 #         "surname": "Accenturer",
 #         "phone": "0811111111",
-#         "email": "testja@gmail.com"
+#         "email": "testja@gmail.com",
+#         "description": "",
+#         "category": ["ตาบอด", "หูหนวก"],
+#         "verified_permanent": "False",
+#         "verified_field": "False",
+#         "verified_free": "False",
+#         "verified_by_network": ["PKs' network", "Parin's Charity"]
 #     }
 
 #     a.register('testja@gmail.com', 'password1', data)

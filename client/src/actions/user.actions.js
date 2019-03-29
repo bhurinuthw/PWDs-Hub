@@ -3,6 +3,8 @@ import { userService } from 'services';
 import { alertActions } from './';
 import { history } from '_helpers';
 
+import firebase from 'firebase';
+
 export const userActions = {
   login,
   logout,
@@ -11,24 +13,45 @@ export const userActions = {
   deleteUser
 };
 
-function login(username, password) {
+function login(email, password) {
   return dispatch => {
-    dispatch(request({ username }));
+    dispatch(request({ email }));
 
-    userService.login(username, password)
-      .then(
-        res => {
-          let user = res.data;
-          dispatch(success(user));
-          user = JSON.stringify(user);
-          localStorage.setItem('user', user);
-          history.push('/home/my_flows');
-        },
-        error => {
-          dispatch(failure(error.toString()));
-          dispatch(alertActions.error(error.toString()));
-        }
-      );
+
+
+    userService.login(email, password).catch(err => {
+      console.log(err);
+    })
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        dispatch(success(user));
+        user = JSON.stringify(user);
+        localStorage.setItem('user', user);
+        history.push('/test_component');
+      } else {
+        // No user is signed in.
+      }
+    });
+
+
+
+    // userService.login(email, password)
+    //   .then(
+    //     res => {
+    //       console.log(res);
+    //       let user = res.data;
+    //       dispatch(success(user));
+    //       user = JSON.stringify(user);
+    //       localStorage.setItem('user', user);
+    //       history.push('/test_component');
+    //     },
+    //     error => {
+    //       dispatch(failure(error.toString()));
+    //       dispatch(alertActions.error(error.toString()));
+    //     }
+    //   );
 
     // Fake login
     // setTimeout(() => {
@@ -61,7 +84,9 @@ function register(user) {
     userService.register(user)
       .then(
         user => {
-          dispatch(success());
+
+          console.log(user);
+          dispatch(success(user));
           history.push('/login');
           dispatch(alertActions.success('Registration successful'));
         },

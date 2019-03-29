@@ -4,14 +4,17 @@ import axios from 'axios'
 
 import { globalConstants } from '_constants'
 
+import firebase from "firebase";
+
+
 export const userService = {
   login,
   logout,
   register,
 };
 
-function login(username, password) {
-  return axios.post(globalConstants.USER_LOGIN_URL, { username, password })
+function login(email, password) {
+  return firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
 function logout() {
@@ -23,6 +26,7 @@ function logout() {
 }
 
 function register(user) {
-  return axios.post(globalConstants.USER_REGISTER_URL, user)
+  const { email, password } = user;
+  return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
 

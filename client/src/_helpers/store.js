@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from 'reducers';
 import { applyStorageListener } from './storage_listener'
 
-import { socketMiddleware } from 'middlewares'
+// import { socketMiddleware } from 'middlewares'
 
 const loggerMiddleware = createLogger();
 
@@ -13,9 +13,8 @@ export const store = createStore(
   applyMiddleware(
     thunkMiddleware,
     loggerMiddleware,
-    socketMiddleware
   )
 );
 
 // Listeners
-applyStorageListener(store); // Require for open the second tab in grapesjs editor
+// applyStorageListener(store); // Require for open the second tab in grapesjs editor

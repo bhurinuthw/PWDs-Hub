@@ -20,21 +20,21 @@ class Login extends Component {
     }
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
     };
   }
 
   onChangeusername = (e) => {
-    this.setState({ username: e.target.value });
+    this.setState({ email: e.target.value });
   }
   onChangePassword = (e) => {
     this.setState({ password: e.target.value });
   }
 
   onLogin = () => {
-    const { username, password } = this.state;
-    this.props.dispatch(userActions.login(username, password));
+    const { email, password } = this.state;
+    this.props.dispatch(userActions.login(email, password));
   }
 
   onForgot = () => {
@@ -73,7 +73,7 @@ class Login extends Component {
               ref='usernameInput'
               autoFocus
               placeholder="Username"
-              value={this.state.username}
+              value={this.state.email}
               onChange={this.onChangeusername} />
           </FormField>
           <FormField>

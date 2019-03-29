@@ -44,16 +44,16 @@ class Authentication:
         results = db.child("PWD_users").push(data, user['idToken'])
 
 
-if __name__ == "__main__":
-    a = Authentication()
+# if __name__ == "__main__":
+#     a = Authentication()
 
-    data = {
-        "n_id": "12345678",
-        "prefix": "Mr",
-        "name": "TestJa",
-        "surname": "Accenturer",
-        "phone": "0811111111",
-        "email": "testja@gmail.com"
-    }
+#     data = {
+#         "n_id": "12345678",
+#         "prefix": "Mr",
+#         "name": "TestJa",
+#         "surname": "Accenturer",
+#         "phone": "0811111111",
+#         "email": "testja@gmail.com"
+#     }
 
-    a.register('testja@gmail.com', 'password1', data)
+#     a.register('testja@gmail.com', 'password1', data)

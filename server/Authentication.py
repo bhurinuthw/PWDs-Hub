@@ -41,4 +41,19 @@ class Authentication:
         db = self.firebase.database()
         user = auth.sign_in_with_email_and_password(email, password)
         uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
-        results = db.child("users").push(data, user['idToken'])
+        results = db.child("PWD_users").push(data, user['idToken'])
+
+
+if __name__ == "__main__":
+    a = Authentication()
+
+    data = {
+        "n_id": "12345678",
+        "prefix": "Mr",
+        "name": "TestJa",
+        "surname": "Accenturer",
+        "phone": "0811111111",
+        "email": "testja@gmail.com"
+    }
+
+    a.register('testja@gmail.com', 'password1', data)

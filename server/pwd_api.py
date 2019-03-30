@@ -15,7 +15,10 @@ def get():
     if(request.method == 'GET'):
         data = messager.get("PWD_users",None)
         #pack to JSON response
-        response = jsonify(data)
+        lt = []
+        for element in data:
+            lt.append(data[element])
+        response = jsonify(lt)
         response.status_code = 200
         return response
 
@@ -41,12 +44,12 @@ def getByFilter():
         company = request.form.to_dict()['company']
         department = request.form.to_dict()['department']
         province = request.form.to_dict()['province']
-        res = {}
+        lt = []
         for user in data:
             if(data[user]['company'] == company or data[user]['department'] == department or data[user]['province'] == province):
-                res[user] = data[user]
+                lt.append(data[user])
         #pack to JSON response
-        response = jsonify(res)
+        response = jsonify(lt)
         response.status_code = 200
         return response    
 

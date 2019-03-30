@@ -50,6 +50,7 @@ class Authentication:
         user = auth.sign_in_with_email_and_password(email, password)
         uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
         results = db.child("PWD_users").push(data, user['idToken'])
+        results = db.child("roles").push('pwd', user['idToken'])
 
     def createNewUser(self, email, password, role, data):
         auth = self.firebase.auth()
@@ -58,8 +59,10 @@ class Authentication:
         uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
         if role == "company":
             results = db.child("Company_users").push(data, user['idToken'])
+            results = db.child("roles").push('company', user['idToken'])
         elif role == "department":
             results = db.child("Department_users").push(data, user['idToken'])
+            results = db.child("roles").push('department', user['idToken'])
 
     def format_pwa_data(self, data):
         data = {

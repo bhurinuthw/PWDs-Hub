@@ -27,6 +27,7 @@ class Authentication:
             print(error['message'])
 
     def register(self, data):
+        print(data)
         auth = self.firebase.auth()
         email = data["email"]
         password = data["password"]
@@ -111,9 +112,9 @@ if __name__ == "__main__":
         "name": "ฮ่าๆๆ",
         "region": "กลาง",
         "province": "กรุงเทพ",
-        "email": "dep@gmail.com",
+        "email": "com@gmail.com",
         "password": "testjha11",
-        "role": "department"
+        "role": "company"
     }
 
     a.register(data)

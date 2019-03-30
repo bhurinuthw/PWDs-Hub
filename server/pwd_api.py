@@ -8,7 +8,7 @@ app = Flask(__name__)
 url = 'https://accenture-hackathon-2019-11a52.firebaseio.com/' #firebase db url
 messager = firebase.FirebaseApplication(url)
 
-#register
+#get all user
 @app.route("/pwd", methods = ['GET'])
 def get():
     if(request.method == 'GET'):
@@ -17,7 +17,20 @@ def get():
         response.status_code = 200
         return response
 
-@app.route("/pwd/update", methods = ['PUT'])
+#get user by id (json body)
+@app.route("/pwd/id", methods = ['GET'])
+def getByFilter():
+    if(request.method == 'GET'):
+        request_data = request.get()
+
+#get user by filter (json body)
+@app.route("/pwd/id", methods = ['GET'])
+def getByFilter():
+    if(request.method == 'GET'):
+        request_data = request.get()       
+
+#update user profile (json body)
+@app.route("/pwd/edit", methods = ['PUT'])
 def update():
     if(request.method == 'PUT'):
         pass

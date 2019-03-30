@@ -145,7 +145,7 @@ class Register extends Component {
               autoFocus
               placeholder="เบอร์์โทรศัพท์"
               value={this.state.lastName}
-              onChange={this.onChangeLastName} />
+              onChange={this.onChangeTelephone} />
           </FormField>
 
           <FormField style={{ display: 'flex', flex: 1 }}>

@@ -20,31 +20,33 @@ import { Row, Col } from 'react-flexbox-grid';
 
 import { history } from '_helpers';
 
-import PwdFilter from 'components/pwd_filter'
+import PwdFilter from 'components/pwd_filter';
+import PwdItem from 'components/collaborator_item';
+import { pwds } from './mockup'
 
 class Home extends Component {
+  renderPwds = () => {
+    return pwds.map((item, index) =>
+      <Col lg={6} sm={6} xs={12} key={index}>
+        <PwdItem name={item.name} description={item.description}
+          imgUrl={item.imgUrl} />
+      </Col>)
+  }
+
+
   render() {
     return (
       <div style={global.mainContainer}>
-        <Box pad={{ horizontal: 'medium' }}>
+        <Box pad={{ horizontal: 'medium', vertical: 'medium' }} gap="small">
           <PwdFilter />
-          <Row>
-            <Col lg={8} sm={8} xs={12}>
-              {/* <Box direction="row" align="center">
-              <Heading size='small' margin={{ right: 'medium' }}>My Flows</Heading>
-              <Tabs activeIndex={this.state.activeTabIndex} onActive={this.onActiveTab}>
-                <Tab title="Active" />
-                <Tab title="Stopped" />
-              </Tabs>
-            </Box> */}
-            </Col>
-
-            <Col lg={4} sm={4} xs={12}>
-              {/* <Box direction="row" align="center" fill justify="end">
-              <Button label="New Flow" primary icon={<Add />} color="accent-1" onClick={() => this.onCreateFlow()} />
-            </Box> */}
-            </Col>
-          </Row>
+          <Box margin={{top: 'medium'}}>
+            <Row>
+              {/* <Col lg={8} sm={8} xs={12}>
+              <PwdItem />
+            </Col> */}
+              {this.renderPwds()}
+            </Row>
+          </Box>
         </Box>
       </div>);
   }

@@ -49,6 +49,7 @@ class Authentication:
         db = self.firebase.database()
         user = auth.sign_in_with_email_and_password(email, password)
         uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
+        data['uid'] = uid
         results = db.child("PWD_users").push(data, user['idToken'])
         results = db.child("roles").push('pwd', user['idToken'])
 
@@ -57,6 +58,7 @@ class Authentication:
         db = self.firebase.database()
         user = auth.sign_in_with_email_and_password(email, password)
         uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
+        data['uid'] = uid
         if role == "company":
             results = db.child("Company_users").push(data, user['idToken'])
             results = db.child("roles").push('company', user['idToken'])
@@ -77,6 +79,7 @@ class Authentication:
             "department": "",
             "company": "",
             "img_url": "",
+            "province": "",
         }
         return data
 
@@ -89,28 +92,28 @@ class Authentication:
         }
         return data
 
-# if __name__ == "__main__":
-#     a = Authentication()
+if __name__ == "__main__":
+    a = Authentication()
 
-    # data = {
-    #     "n_id": "12345678",
-    #     "prefix": "นาย",
-    #     "name": "สวัสดี",
-    #     "surname": "ครับ",
-    #     "phone": "0811111111",
-    #     "email": "pwd@gmail.com",
-    #     "category": ["ตาบอด", "หูหนวก"],
-    #     "password": "testjha11",
-    #     "role": "pwd"
-    # }
+    data = {
+        "n_id": "12345678",
+        "prefix": "นาย",
+        "name": "สวัสดี",
+        "surname": "ครับ",
+        "phone": "0811111111",
+        "email": "pwd1@gmail.com",
+        "category": ["ตาบอด", "หูหนวก"],
+        "password": "testjha11",
+        "role": "pwd"
+    }
 
-#     data = {
-#         "name": "ฮ่าๆๆ",
-#         "region": "กลาง",
-#         "province": "กรุงเทพ",
-#         "email": "dep@gmail.com",
-#         "password": "testjha11",
-#         "role": "department"
-#     }
+    data = {
+        "name": "ฮ่าๆๆ",
+        "region": "กลาง",
+        "province": "กรุงเทพ",
+        "email": "dep@gmail.com",
+        "password": "testjha11",
+        "role": "department"
+    }
 
-    # a.register(data)
+    a.register(data)

@@ -32,6 +32,9 @@ class Register extends Component {
 
   onChangeConfirmPass = (e) => {
     this.setState({ confirmPass: e.target.value });
+
+    //test/base/iceyo
+    // this.props.history.push('/iceyo')
   }
 
 
@@ -93,10 +96,11 @@ class Register extends Component {
               placeholder="Confirm password"
               type="password"
               value={this.state.confirmPass}
+              // onChange={(event) => {this.onChangeConfirmPass(event, esadasd)}}
               onChange={this.onChangeConfirmPass} />
           </FormField>
           <Box pad="small">
-            <Button primary icon={<UserNew />} label="Create an account" onClick={this.onRegister} />
+            <Button primary icon={<UserNew />} label="Create an account" onClick={() => {this.onRegister()}} />
           </Box>
         </Box>
       </Box>

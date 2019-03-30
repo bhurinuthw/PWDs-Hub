@@ -76,6 +76,7 @@ class Authentication:
             "category": data["category"],
             "department": "",
             "company": "",
+            "img_url": "",
         }
         return data
 
@@ -91,25 +92,25 @@ class Authentication:
 # if __name__ == "__main__":
 #     a = Authentication()
 
-#     data = {
-#         "n_id": "12345678",
-#         "prefix": "นาย",
-#         "name": "สวัสดี",
-#         "surname": "ครับ",
-#         "phone": "0811111111",
-#         "email": "testja@gmail.com",
-#         "category": ["ตาบอด", "หูหนวก"],
-#         "password": "testjha11",
-#         "role": "pwd"
-#     }
-
     # data = {
-    #     "name": "ฮ่าๆๆ",
-    #     "region": "กลาง",
-    #     "province": "กรุงเทพ",
-    #     "email": "comp@gmail.com",
+    #     "n_id": "12345678",
+    #     "prefix": "นาย",
+    #     "name": "สวัสดี",
+    #     "surname": "ครับ",
+    #     "phone": "0811111111",
+    #     "email": "pwd@gmail.com",
+    #     "category": ["ตาบอด", "หูหนวก"],
     #     "password": "testjha11",
-    #     "role": "company"
+    #     "role": "pwd"
     # }
+
+#     data = {
+#         "name": "ฮ่าๆๆ",
+#         "region": "กลาง",
+#         "province": "กรุงเทพ",
+#         "email": "dep@gmail.com",
+#         "password": "testjha11",
+#         "role": "department"
+#     }
 
     # a.register(data)

@@ -42,7 +42,10 @@ def getById_company():
         data = messager.get("Company_users",None)
         #extract body request to get user_id
         company_id = request.form.to_dict()['company_id']
-        res = data[str(company_id)]
+        for company in data:
+            if(data[company]['uid'] == company_id):
+                res = data[company]
+                break
         #pack to JSON response
         response = jsonify(res)
         response.status_code = 200
@@ -56,7 +59,10 @@ def update_department():
         data = messager.get("Department_users",None)
         #extract body request to get user_id
         department_id = request.form.to_dict()['department_id']
-        res = data[str(department_id)]
+        for department in data:
+            if(data[department]['uid'] == department_id):
+                res = data[department]
+                break
         #pack to JSON response
         response = jsonify(res)
         response.status_code = 200
@@ -83,7 +89,10 @@ def getById_pwd():
         data = messager.get("PWD_users",None)
         #extract body request to get user_id
         user_id = request.form.to_dict()['user_id']
-        res = data[str(user_id)]
+        for user in data:
+            if(data[user]['uid'] == user_id):
+                res = data[user]
+                break
         #pack to JSON response
         response = jsonify(res)
         response.status_code = 200

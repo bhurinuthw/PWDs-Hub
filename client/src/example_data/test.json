@@ -1,0 +1,61 @@
+[
+    {
+        "category": [
+            "ตาบอด",
+            "หูหนวก"
+        ],
+        "company": "",
+        "department": "",
+        "description": "",
+        "email": "pwd1@gmail.com",
+        "img_url": "",
+        "n_id": "12345678",
+        "name": "สวัสดี",
+        "phone": "0811111111",
+        "prefix": "นาย",
+        "province": "",
+        "surname": "ครับ",
+        "uid": "r5vTp3jQvggFfyGLG3DjOgQJwlx1"
+    },
+    {
+        "category": "\"blind\", \"deaf\"",
+        "company": "",
+        "department": "",
+        "description": "",
+        "email": "sawasdee2@gmail.com",
+        "img_url": "",
+        "n_id": "11111111",
+        "name": "ddd",
+        "phone": "0811111111",
+        "prefix": "mr",
+        "surname": "dfsfds"
+    },
+    {
+        "category": "blind, def",
+        "company": "",
+        "department": "",
+        "description": "",
+        "email": "sawasdee3@gmail.com",
+        "img_url": "",
+        "n_id": "11111111",
+        "name": "ddd",
+        "phone": "0811111111",
+        "prefix": "mr",
+        "surname": "dfsfds"
+    },
+    {
+        "category": "ตาบอด",
+        "company": "",
+        "department": "",
+        "description": "",
+        "email": "pwd11@gmail.com",
+        "img_url": "",
+        "n_id": "12345678",
+        "name": "สวัสดี",
+        "phone": "0811111111",
+        "prefix": "นาย",
+        "province": "",
+        "surname": "ครับ",
+        "uid": "kukvsxGQfwgF0eBO8gYWRxbhNGJ3"
+    }
+]

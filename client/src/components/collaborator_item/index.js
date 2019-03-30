@@ -30,31 +30,20 @@ export default class index extends Component {
 
 
   render() {
-    const { name, type } = this.props
-    const { openDropdown } = this.state
+    const { name, description, imgUrl, department, province, delay } = this.props
     return (
-      <Box direction="row" gap="small" margin='xsmall'
-        background="light-0" pad="xsmall" round={{ size: 'small' }}>
-        <Avatar size="48px" name={name} round />
+      <Box direction="row" gap="small" margin='xsmall' style={{ cursor: 'pointer' }}
+        responsive={false} animation={{ type: 'fadeIn', delay: delay * 100 }}
+        onClick={() => this.props.onClick()}
+        background="light-0" pad="medium" round={{ size: 'small' }}>
+        <Avatar size="100" round
+          src={imgUrl} />
         <Box direction="row" flex justify="between">
           <Box flex direction="column" justify="between">
-            <Text >{name}</Text>
-            <Text size="small" color="dark-6">{type}</Text>
+            <Text size="medium" weight="bold">{name}</Text>
+            <Text size="small" color="dark-6">{description}</Text>
+            <Text size="small" color="dark-6">{department}</Text>
           </Box>
-          <DropButton
-            dropAlign={{ top: "bottom", right: "right" }}
-            open={openDropdown}
-            onClose={() => this.setState({ openDropdown: false })}
-            dropContent={
-              <DropContent
-                title="Actions"
-                items={[{ label: 'Edit Permission' }, { label: 'Remove' }]}
-                onSelect={this.onSelectAction}
-                onClose={this.onCloseDropdown} />}
-          >
-            <PlainButton icon={<FormDown />}
-              onClick={() => this.setState({ openDropdown: true })} />
-          </DropButton>
         </Box>
       </Box>
     )

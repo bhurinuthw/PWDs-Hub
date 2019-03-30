@@ -62,6 +62,9 @@ class Register extends Component {
   }
   onChangeConfirmPass = (e) => {
     this.setState({ confirmPass: e.target.value });
+
+    //test/base/iceyo
+    // this.props.history.push('/iceyo')
   }
 
   onChangeDefectiveType = (defectiveType) => {

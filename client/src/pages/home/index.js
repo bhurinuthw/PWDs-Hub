@@ -11,6 +11,8 @@ import { Button, Box, Text, Heading } from 'grommet';
 import NotFound from 'pages/not_found'
 import MyFlows from 'pages/my_flows';
 
+import ImageUploadExample from 'pages/add_activity';
+
 import { Route, Switch } from 'react-router-dom'
 
 import Media from 'react-media'
@@ -69,6 +71,7 @@ export default class index extends Component {
         <Switch>
           <Route exact path={match.url} component={Home} />
           <Route exact path={match.url + "/my_flows"} component={MyFlows} />
+          <Route exact path={match.url + "/test_image"} component={MyFlows} />
           <Route component={NotFound} />
         </Switch>
       </div>

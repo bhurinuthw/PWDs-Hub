@@ -1,3 +1,4 @@
+
 import './index.css';
 
 import React from 'react';
@@ -7,6 +8,8 @@ import {
   Register, ResetPassword,
   Test
 } from 'pages'
+
+import Login2 from 'pages/login2';
 
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
@@ -32,6 +35,7 @@ const App = () => (
 
           {/* For dev */}
           <Route exact path="/test_component" component={Test} />
+          <Route exact path="/krai_test" component={Login2} />
 
           {/* <Route component={NotFound} /> */}
           <Redirect from="*" to="/home/my_flows" />

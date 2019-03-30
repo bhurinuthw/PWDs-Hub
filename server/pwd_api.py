@@ -14,6 +14,7 @@ messager = firebase.FirebaseApplication(url)
 def get():
     if(request.method == 'GET'):
         data = messager.get("PWD_users",None)
+        #pack to JSON response
         response = jsonify(data)
         response.status_code = 200
         return response
@@ -26,7 +27,9 @@ def getById():
         #extract body request to get user_id
         user_id = request.form.to_dict()['user_id']
         res = data[str(user_id)]
+        #pack to JSON response
         response = jsonify(res)
+        response.status_code = 200
         return response
 
 #get user by filter (json body)
@@ -35,9 +38,16 @@ def getByFilter():
     if(request.method == 'GET'):
         data = messager.get("PWD_users",None)
         #extract body request to get user_id
-        user_id = request.form.to_dict()['user_id']
-        res = data[str(user_id)]
+        company = request.form.to_dict()['company']
+        department = request.form.to_dict()['department']
+        province = request.form.to_dict()['province']
+        res = {}
+        for user in data:
+            if(data[user]['company'] == company or data[user]['department'] == department or data[user]['province'] == province):
+                res[user] = data[user]
+        #pack to JSON response
         response = jsonify(res)
+        response.status_code = 200
         return response    
 
 

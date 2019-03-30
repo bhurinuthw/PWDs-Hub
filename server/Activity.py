@@ -19,6 +19,7 @@ class Activity:
             self.config = json.load(json_data_file)['config']
 
     def create_activity(self, data):
+        data = request.get_json(silent=True)
         db = self.firebase.database()
         key = db.generate_key()
         data['activity_id'] = key
@@ -36,21 +37,3 @@ class Activity:
         response = json.dumps(lt)
         return response
 
-    def update_activity(self, data):
-        pass
-
-'''
-data = {
-    "pwd_id": "22",
-    "company_id": "33",
-    "department_id": "4",
-    "description": "wat",
-    "isPrivate": "True",
-    "pic_url": "",
-    "isVerified": "True",
-}
-
-
-a = Activity()
-a.create_activity(data)
-# a.get_activity('1')'''

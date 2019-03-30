@@ -28,7 +28,7 @@ class Authentication:
             print(error['message'])
 
     def register(self, data):
-        print(type(request.get_json(silent=True)))
+        data = request.get_json(silent=True)
         auth = self.firebase.auth()
         email = data["email"]
         password = data["password"]

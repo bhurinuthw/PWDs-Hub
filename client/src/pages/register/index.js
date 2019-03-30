@@ -68,6 +68,7 @@ class Register extends Component {
   }
 
   onChangeDefectiveType = (defectiveType) => {
+    console.log(defectiveType);
     this.setState({ defectiveType: defectiveType });
   }
 
@@ -132,7 +133,7 @@ class Register extends Component {
         </Box>
 
         <Box direction="row" gap="small">
-          <FormField style={{ display: 'flex', flex: 2 }}>
+          <FormField style={{ display: 'flex', flex: 1 }}>
             <TextInput
               ref='emailInput'
               autoFocus
@@ -153,7 +154,7 @@ class Register extends Component {
           <FormField style={{ display: 'flex', flex: 1 }}>
             <Select
               placeholder="ประเภทความพิการ"
-              onChange={({ defectiveType }) => this.onChangeDefectiveType(defectiveType)}
+              onChange={( defectiveType ) => this.onChangeDefectiveType(defectiveType)}
               value={this.state.defectiveType}
               options={this.state.defectiveOptions} />
           </FormField>

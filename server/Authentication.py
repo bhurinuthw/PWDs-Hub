@@ -77,6 +77,7 @@ class Authentication:
             "department": "",
             "company": "",
             "img_url": "",
+            "province": "",
         }
         return data
 
@@ -89,20 +90,20 @@ class Authentication:
         }
         return data
 
-# if __name__ == "__main__":
-#     a = Authentication()
+if __name__ == "__main__":
+    a = Authentication()
 
-    # data = {
-    #     "n_id": "12345678",
-    #     "prefix": "นาย",
-    #     "name": "สวัสดี",
-    #     "surname": "ครับ",
-    #     "phone": "0811111111",
-    #     "email": "pwd@gmail.com",
-    #     "category": ["ตาบอด", "หูหนวก"],
-    #     "password": "testjha11",
-    #     "role": "pwd"
-    # }
+    data = {
+        "n_id": "12345678",
+        "prefix": "นาย",
+        "name": "สวัสดี",
+        "surname": "ครับ",
+        "phone": "0811111111",
+        "email": "pwd1@gmail.com",
+        "category": ["ตาบอด", "หูหนวก"],
+        "password": "testjha11",
+        "role": "pwd"
+    }
 
 #     data = {
 #         "name": "ฮ่าๆๆ",
@@ -113,4 +114,4 @@ class Authentication:
 #         "role": "department"
 #     }
 
-    # a.register(data)
+    a.register(data)

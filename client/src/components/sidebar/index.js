@@ -10,7 +10,7 @@ const sideBarWidth = 200;
 const appBarHeight = 60;
 
 const iconColor = "#ffffff";
-const menus = ["my_tasks", "my_flows", "my_team", "setting"];
+const menus = ["timeline", "account_setting"];
 
 export default class SideBar extends Component {
 
@@ -65,33 +65,17 @@ export default class SideBar extends Component {
                   <PlainButton hoverIndicator
                     color="light-0"
                     background={activeIndex == 0 ? "light-4" : "default"}
-                    onClick={() => this.handleSelectMenu('/my_tasks', 0)}
+                    onClick={() => this.handleSelectMenu('/timeline/1', 0)}
                     icon={<Task color={iconColor} />}
-                    label="My Tasks" />
+                    label="Timeline" />
                 </Box>
                 <Box fill="horizontal">
                   <PlainButton hoverIndicator
                     color="light-0"
                     background={activeIndex == 1 ? "light-4" : "default"}
-                    onClick={() => this.handleSelectMenu('/my_flows', 1)}
-                    icon={<Sort color={iconColor} />}
-                    label="My Flows" />
-                </Box>
-                <Box fill="horizontal">
-                  <PlainButton hoverIndicator
-                    color="light-0"
-                    background={activeIndex == 2 ? "light-4" : "default"}
-                    onClick={() => this.handleSelectMenu('/my_team', 2)}
-                    icon={<Group color={iconColor} />}
-                    label="My Team" />
-                </Box>
-                <Box fill="horizontal">
-                  <PlainButton hoverIndicator
-                    color="light-0"
-                    background={activeIndex == 3 ? "light-4" : "default"}
-                    onClick={() => this.handleSelectMenu('/setting', 3)}
+                    onClick={() => this.handleSelectMenu('/account_setting', 1)}
                     icon={<Performance color={iconColor} />}
-                    label="Setting" />
+                    label="Account Setting" />
                 </Box>
               </Box>
             : null

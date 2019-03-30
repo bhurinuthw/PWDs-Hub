@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 
 import {
   Box, FormField, TextInput,
-  Button, Image, Tab, Select, Tabs
+  Button, Image, Tab, Select, Tabs, Text, CheckBox
 } from 'grommet';
 import { UserNew, Checkmark } from 'grommet-icons';
 import { connect } from 'react-redux'
@@ -11,22 +11,35 @@ import { withRouter } from 'react-router-dom';
 
 import { Row, Col } from 'react-flexbox-grid';
 
+class Option extends PureComponent {
+  render() {
+    const { value, selected } = this.props;
+    return (
+      <Box direction="row" gap="small" align="center" pad="xsmall">
+        <CheckBox tabIndex="-1" checked={selected} onChange={() => { }} />
+        {value}
+      </Box>
+    );
+  }
+}
+
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      identityNumber: '',
-      namePrefix: '',
-      firstName: '',
-      lastName: '',
-      telephone: '',
+      n_id: '',
+      prefix: '',
+      name: '',
+      surname: '',
+      phone: '',
       email: '',
       password: '',
       confirmPass: '',
       passwordError: null,
 
-      defectiveType: '',
+      roles: ['pwd', 'department', 'company'],
+      category: [],
       defectiveOptions: [
         'การมองเห็น',
         'การได้ยิน',
@@ -40,19 +53,19 @@ class Register extends Component {
   }
 
   onChangeIdentityNumber = (e) => {
-    this.setState({ identityNumber: e.target.value });
+    this.setState({ n_id: e.target.value });
   }
   onChangeNamePrefix = (e) => {
-    this.setState({ namePrefix: e.target.value });
+    this.setState({ prefix: e.target.value });
   }
   onChangeFirstName = (e) => {
-    this.setState({ firstName: e.target.value });
+    this.setState({ name: e.target.value });
   }
   onChangeLastName = (e) => {
-    this.setState({ lastName: e.target.value });
+    this.setState({ surname: e.target.value });
   }
   onChangeTelephone = (e) => {
-    this.setState({ telephone: e.target.value });
+    this.setState({ phone: e.target.value });
   }
   onChangeEmail = (e) => {
     this.setState({ email: e.target.value });
@@ -67,10 +80,17 @@ class Register extends Component {
     // this.props.history.push('/iceyo')
   }
 
-  onChangeDefectiveType = (defectiveType) => {
-    console.log(defectiveType);
-    this.setState({ defectiveType: defectiveType });
+  onChangeDefectiveType = ({ category }) => {
+    console.log(category);
+    this.setState({ category: category });
   }
+
+  setActiveTab = (index) => {
+    const role = this.state.roles[index];
+
+
+  }
+
 
   onRegister = () => {
     const { username, email, password, confirmPass } = this.state;
@@ -94,40 +114,41 @@ class Register extends Component {
   }
 
   renderTab1Content = () => {
+    const { category, defectiveOptions } = this.state;
     return (
       <Box gap="small">
         <FormField >
           <TextInput
-            ref='identityNumber'
+            ref='n_id'
             autoFocus
             placeholder="เลขบัตรประชาชน"
-            value={this.state.identityNumber}
+            value={this.state.n_id}
             onChange={this.onChangeIdentityNumber} />
         </FormField>
 
         <Box direction="row" gap="small">
           <FormField >
             <TextInput
-              ref='namePrefix'
+              ref='prefix'
               autoFocus
               placeholder="คำนำหน้าชื่อ"
-              value={this.state.namePrefix}
+              value={this.state.prefix}
               onChange={this.onChangeNamePrefix} />
           </FormField>
           <FormField >
             <TextInput
-              ref='firstName'
+              ref='name'
               autoFocus
               placeholder="ชื่อจริง"
-              value={this.state.firstName}
+              value={this.state.name}
               onChange={this.onChangeFirstName} />
           </FormField>
           <FormField style={{ display: 'flex', flex: 1, }}>
             <TextInput
-              ref='lastName'
+              ref='surname'
               autoFocus
               placeholder="นามสกุล"
-              value={this.state.lastName}
+              value={this.state.surname}
               onChange={this.onChangeLastName} />
           </FormField>
         </Box>
@@ -144,19 +165,36 @@ class Register extends Component {
 
           <FormField style={{ display: 'flex', flex: 1 }}>
             <TextInput
-              ref='telephone'
+              ref='phone'
               autoFocus
               placeholder="เบอร์์โทรศัพท์"
-              value={this.state.lastName}
+              value={this.state.surname}
               onChange={this.onChangeTelephone} />
           </FormField>
 
           <FormField style={{ display: 'flex', flex: 1 }}>
             <Select
+              multiple
               placeholder="ประเภทความพิการ"
-              onChange={( defectiveType ) => this.onChangeDefectiveType(defectiveType)}
-              value={this.state.defectiveType}
+              onChange={({ category }) => this.onChangeDefectiveType(category)}
+              value={this.state.category}
               options={this.state.defectiveOptions} />
+
+            {/* <Select
+              size="medium"
+              placeholder="ประเภทความพิการ"
+              multiple
+              closeOnChange={false}
+              disabledKey="dis"
+              labelKey="lab"
+              valueKey="val"
+              value={category}
+              options={defectiveOptions}
+              onChange={({ category: nextValue }) =>
+                this.setState({ category: nextValue })
+              }
+              onClose={() => this.setState({ options: defectiveOptions })}
+            /> */}
           </FormField>
         </Box>
       </Box>
@@ -168,14 +206,15 @@ class Register extends Component {
     const { passwordError } = this.state;
 
     return (
-      <Box flex direction="column" back align="center" justify="center" fill='vertical'>
+      <Box flex direction="column" background="light-1"
+        align="center" justify="center" fill='vertical'>
         <Box pad='medium' style={{ maxWidth: 700 }}
-          round={{ size: 'small' }}
+          round={{ size: 'small' }} background="light-0"
           animation='fadeIn'>
           {/* <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" /> */}
 
-
-          <Tabs alignSelf="start">
+          <Text size="large" weight="bold">ลงทะเบียน</Text>
+          <Tabs alignSelf="start" onActive={this.setActiveTab}>
             <Tab title="ผู้พิการ">
               {this.renderTab1Content()}
             </Tab>

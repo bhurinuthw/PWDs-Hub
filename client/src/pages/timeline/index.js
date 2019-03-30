@@ -46,9 +46,7 @@ class Timeline extends Component {
   renderUserProperties = () => {
     return (
       <Box style={{ wordWrap: 'break-word' }}>
-        <p >askdlsakdlakdlsadksadlsakdlsadklsakdlsdklsa
-          asdsaldksalksaldksaldksaldsakdsadsadsdlsa;dlsa;dsald;
-          dladksaldksaldksaldksad
+        <p >This is my description bra bra bra.
         </p>
 
       </Box>

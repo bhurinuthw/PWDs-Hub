@@ -24,22 +24,49 @@ import PwdFilter from 'components/pwd_filter';
 import PwdItem from 'components/collaborator_item';
 import { pwds } from './mockup'
 
+import { globalConstants } from '_constants';
+
+import axios from 'axios';
+
 class Home extends Component {
+
+  state = {
+    pwdList: [],
+    isLoading: true,
+  }
+
+  componentDidMount = () => {
+    axios.get(globalConstants.DOMAIN_NAME + "pwd").then(
+      (res) => {
+        this.setState({ pwdList: res.data, isLoading: false });
+      }).catch((err) => {
+        console.error(err);
+        this.setState({ isLoading: false });
+      })
+  }
+
 
   navigateToProfile = (uid) => {
     const { history } = this.props;
     history.push('/home/timeline/' + uid);
   }
 
-
   renderPwds = () => {
-    return pwds.map((item, index) =>
-      <Col lg={6} sm={6} xs={12} key={index}>
-        <PwdItem
-          onClick={() => this.navigateToProfile("1")}
-          name={item.name} description={item.description}
-          imgUrl={item.imgUrl} />
-      </Col>)
+    const { pwdList } = this.state;
+    console.log(pwdList);
+    if (pwdList != []) {
+      console.log(pwdList);
+      return pwdList.map((item, index) =>
+        <Col lg={6} sm={6} xs={12} key={index}>
+          <PwdItem
+            onClick={() => this.navigateToProfile("1")}
+            name={`${item.prefix} ${item.name} ${item.surname}`} description={item.description}
+            imgUrl={item.imgUrl} />
+        </Col>)
+    } else {
+      return null;
+    }
+
   }
 
 

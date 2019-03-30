@@ -130,14 +130,13 @@ class Register extends Component {
 
     const userData = {
       n_id, prefix, name, surname, phone, email, password,
-      category
+      category, role
     }
 
     this.setState({ passwordError: null, isLoading: true });
 
-    axios.post(globalConstants + "/register", {
-        n_id, prefix, name, surname, phone, email, password,
-        category, role
+    axios.post(globalConstants.DOMAIN_NAME + "register", {
+      email: "overtone00445@gmail.com",
     }).then(
       (res) => {
         this.setState({ isLoading: false });

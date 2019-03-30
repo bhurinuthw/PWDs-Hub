@@ -56,16 +56,18 @@ class Home extends Component {
   }
 
   renderPwds = () => {
-    const { pwdList } = this.state;
+    const { pwdList, company } = this.state;
     if (pwdList != []) {
-    console.log(pwdList);
-      return pwdList.map((item, index) =>
-        <Col lg={6} sm={6} xs={12} key={index}>
-          <PwdItem delay={index}
-            onClick={() => this.navigateToProfile(item, index)}
-            name={`${item.prefix} ${item.name} ${item.surname}`} description={item.description}
-            imgUrl={item.img_url} department={item.department} />
-        </Col>)
+      return pwdList.map((item, index) => {
+        if (company == null || item.company === company) {
+          return (<Col lg={6} sm={6} xs={12} key={index}>
+            <PwdItem delay={index}
+              onClick={() => this.navigateToProfile(item, index)}
+              name={`${item.prefix} ${item.name} ${item.surname}`} description={item.description}
+              imgUrl={item.img_url} department={item.department} />
+          </Col>);
+        }
+      })
     } else {
       return (
         <Box align="center" pad='small'>
@@ -83,7 +85,7 @@ class Home extends Component {
     return (
       <div style={global.mainContainer}>
         <Box pad={{ horizontal: 'medium', vertical: 'medium' }} gap="small">
-          <PwdFilter />
+          <PwdFilter onSelectCompanyFilter={(company) => { this.setState({ company: company }) }} />
           <Box margin={{ top: 'small' }}>
             <Row>
               {/* <Col lg={8} sm={8} xs={12}>

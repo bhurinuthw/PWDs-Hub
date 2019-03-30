@@ -19,14 +19,15 @@ export default class index extends Component {
 
     onChangeCompanyFilter = (value) => {
         this.setState({ companyFilter: value });
+        this.props.onSelectCompanyFilter(value);
 
     }
-    onChangeProvinceFilter = (value) => {
-        this.setState({ provinceFilter: value });
+    onChangeProvinceFilter = (event) => {
+        this.setState({ provinceFilter: event.target.value });
 
     }
-    onChangeDepartmentFilter = (value) => {
-        this.setState({ departmentFilter: value });
+    onChangeDepartmentFilter = (event) => {
+        this.setState({ departmentFilter: event.target.value });
     }
 
     render() {
@@ -39,7 +40,7 @@ export default class index extends Component {
                     style={{ display: 'flex', flex: 1 }}>
                     <Select
                         placeholder="บริษัท"
-                        onChange={(defectiveType) => this.onChangeCompanyFilter(defectiveType)}
+                        onChange={({ value: nextValue }) => this.onChangeCompanyFilter(nextValue)}
                         value={this.state.companyFilter}
                         options={companyOptions} />
                 </Box>

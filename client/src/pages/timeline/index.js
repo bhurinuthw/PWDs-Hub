@@ -101,9 +101,13 @@ class Timeline extends Component {
     const { currentUser } = this.state;
     if (currentUser == null) return;
     return (
-      <Box style={{ wordWrap: 'break-word' }}>
-        <p >{currentUser.description}
-        </p>
+      <Box style={{ wordWrap: 'break-word' }} gap="small">
+        <Text>
+          {currentUser.description}
+        </Text>
+        <Text>
+          {currentUser.department}
+        </Text>
       </Box>
     );
   }

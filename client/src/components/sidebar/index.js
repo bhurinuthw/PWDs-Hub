@@ -63,17 +63,15 @@ export default class SideBar extends Component {
                   <PlainButton hoverIndicator
                     color="light-0"
                     background={activeIndex == 0 ? "light-4" : "default"}
-                    onClick={() => this.handleSelectMenu('/timeline/1', 0)}
-                    icon={<Task color={iconColor} />}
-                    label="Timeline" />
+                    onClick={() => this.handleSelectMenu('/', 0)}
+                    label="Home" />
                 </Box>
                 <Box fill="horizontal">
                   <PlainButton hoverIndicator
                     color="light-0"
                     background={activeIndex == 1 ? "light-4" : "default"}
-                    onClick={() => this.handleSelectMenu('/account_setting', 1)}
-                    icon={<Performance color={iconColor} />}
-                    label="Account Setting" />
+                    onClick={() => this.handleSelectMenu('/timeline/1', 1)}
+                    label="Timeline" />
                 </Box>
               </Box>
             : null

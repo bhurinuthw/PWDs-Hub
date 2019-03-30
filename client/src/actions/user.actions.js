@@ -27,7 +27,7 @@ function login(email, password) {
         dispatch(success(user));
         user = JSON.stringify(user);
         localStorage.setItem('user', user);
-        history.push('/home');
+        history.push('/home/timeline/1');
       } else {
         // No user is signed in.
       }

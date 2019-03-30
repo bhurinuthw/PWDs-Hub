@@ -147,6 +147,7 @@ class Register extends Component {
     }, config).then(
       (res) => {
         this.setState({ isLoading: false });
+        this.props.history.push('/login');
       }).catch(err => {
         console.error(err);
         this.setState({ isLoading: false });

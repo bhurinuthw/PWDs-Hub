@@ -19,7 +19,7 @@ def get():
 
 #get user by id (json body)
 @app.route("/pwd/id", methods = ['GET'])
-def getByFilter():
+def getById():
     if(request.method == 'GET'):
         user_id = request.form.to_dict()['user_id']
         response = messager.child("PWD_users").order_by_key().equal_to(user_id).get()

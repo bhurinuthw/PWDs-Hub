@@ -20,7 +20,7 @@
 # INITIAL DESCRIPTION
 
   A platform that help PWDs to represent their work in the local service <br>
-  department and what they contributed to the society. Enable them to create <br>
+  department and what they contributed to the society and enable them to create <br>
   a stronger profile.<br>
 
 

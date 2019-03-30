@@ -43,7 +43,7 @@ class Timeline extends Component {
     return (
       <div style={global.mainContainer}>
         <ActivityDialog />
-        <Box direction="row" gap="medium" pad={{ vertical: 'medium' }}>
+        <Box direction="row" gap="medium" pad="medium">
           <Box style={{ display: 'flex', flex: 5, flexDirection: 'column' }}>
             <VerticalTimeline>
               <VerticalTimelineElement

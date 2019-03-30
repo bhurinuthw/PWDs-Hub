@@ -25,10 +25,19 @@ import PwdItem from 'components/collaborator_item';
 import { pwds } from './mockup'
 
 class Home extends Component {
+
+  navigateToProfile = (uid) => {
+    const { history } = this.props;
+    history.push('/home/timeline/' + uid);
+  }
+
+
   renderPwds = () => {
     return pwds.map((item, index) =>
       <Col lg={6} sm={6} xs={12} key={index}>
-        <PwdItem name={item.name} description={item.description}
+        <PwdItem
+          onClick={() => this.navigateToProfile("1")}
+          name={item.name} description={item.description}
           imgUrl={item.imgUrl} />
       </Col>)
   }

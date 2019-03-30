@@ -19,14 +19,16 @@
 
 # INITIAL DESCRIPTION
 
-  <i> Development in progress </i>
+  A platform that help PWDs to represent their work in the local service <br>
+  department and what they contributed to the society and enable them to create <br>
+  a stronger profile.<br>
+
 
 # ADDITIONAL DESCRIPTION
 
-  **None**
+  Uses Node.js and Flask with Firebase
 
 # 
-**PROGRAM VERSION: 0.5.3<br>**
+**PROGRAM VERSION: 1.0.0<br>**
 
 THIS DOCUMENT IS EDITED AS-OF 30 MARCH 2019<br>
-

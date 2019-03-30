@@ -1,10 +1,12 @@
 from flask import Flask, request, Response, abort, jsonify
+from flask_cors import CORS
 from Authentication import *
 from Activity import *
 from firebase import firebase
 import datetime
 
 app = Flask(__name__)
+CORS(app)
 
 auth = Authentication()
 act = Activity()

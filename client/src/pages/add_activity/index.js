@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Box, FormField, TextInput, Button, Heading, Text, Image } from 'grommet';
+import { Box, FormField, TextInput, Button, Heading, Text, Image, TextArea } from 'grommet';
 import { Login as Signin } from 'grommet-icons';
 import { Link, withRouter } from 'react-router-dom'
 
@@ -44,11 +44,23 @@ class ImageUploadExample extends Component {
 }
   render() {
     return (
-        <div>
-            <h1>react js upload file</h1>
-            <input type="file" name="file" onChange={(e)=>this.onChange(e)}/>
-
-        </div>
+        <Box flex direction="column" align="center" justify="center" fill='vertical'>
+            <Box responsive={false} pad='medium' style={{ width: 350 }}
+            round={{ size: 'small' }}
+            animation='fadeIn'>
+                <div>
+                    <h1>Add Activity</h1>
+                    <input type="file" name="file" onChange={(e)=>this.onChange(e)}/>
+                    <br/>
+                    <TextArea></TextArea>
+                    <div> 
+                        <button>Save</button>
+                        <button>Cancel</button>
+                    </div>
+                </div>
+            </Box>
+        </Box>
+     
     )
   }
 }

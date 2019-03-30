@@ -8,8 +8,8 @@ import SideBar from 'components/sidebar';
 
 import { Button, Box, Text, Heading } from 'grommet';
 
-import NotFound from 'pages/not_found'
-import MyFlows from 'pages/my_flows';
+import NotFound from 'pages/not_found';
+import Timeline from 'pages/timeline';
 
 import ImageUploadExample from 'pages/add_activity';
 
@@ -39,7 +39,7 @@ class Home extends Component {
       <div style={global.mainContainer}>
         <Box pad={{ horizontal: 'medium', vertical: 'medium' }} gap="small">
           <PwdFilter />
-          <Box margin={{top: 'medium'}}>
+          <Box margin={{ top: 'small' }}>
             <Row>
               {/* <Col lg={8} sm={8} xs={12}>
               <PwdItem />
@@ -72,7 +72,8 @@ export default class index extends Component {
       <div style={global.globalContainer}>
         <Switch>
           <Route exact path={match.url} component={Home} />
-          <Route exact path={match.url + "/my_flows"} component={MyFlows} />
+          {/* <Route exact path={match.url + "/my_flows"} component={MyFlows} /> */}
+          <Route exact path={match.url + "/timeline/:uid"} component={Timeline} />
           <Route exact path={match.url + "/test_image"} component={ImageUploadExample} />
           <Route component={NotFound} />
         </Switch>

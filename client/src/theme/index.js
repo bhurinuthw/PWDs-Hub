@@ -27,11 +27,11 @@ export const colors = {
 
 export default {
   "global": {
-    control: {
-      border: {
-        radius: "24px"
-      }
-    },
+    // control: {
+    //   border: {
+    //     radius: "24px"
+    //   }
+    // },
     "colors": colors,
     "font": {
       "family": "'HPSimplified', Arial, sans-serif",

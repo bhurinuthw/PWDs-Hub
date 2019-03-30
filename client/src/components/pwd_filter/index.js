@@ -31,9 +31,10 @@ export default class index extends Component {
 
     render() {
         return (
-            <Box direction="row" gap="medium" >
-                <Box background="light-0" pad="xsmall"
-                    round={{ size: 'small' }}
+            <Box direction="row"
+                round={{ size: 'small' }}
+                background="light-0" gap="medium" >
+                <Box pad="xsmall"
                     style={{ display: 'flex', flex: 1 }}>
                     <Select
                         placeholder="บริษัท"
@@ -41,7 +42,7 @@ export default class index extends Component {
                         value={this.state.companyFilter}
                         options={companyOptions} />
                 </Box>
-                <Box background="light-0" pad="xsmall"
+                <Box pad="xsmall"
                     round={{ size: 'small' }}
                     style={{ display: 'flex', flex: 1 }}>
                     <Select
@@ -50,7 +51,7 @@ export default class index extends Component {
                         value={this.state.provinceFilter}
                         options={provinceOptions} />
                 </Box>
-                <Box background="light-0" pad="xsmall"
+                <Box pad="xsmall"
                     round={{ size: 'small' }}
                     style={{ display: 'flex', flex: 1 }}>
                     <Select

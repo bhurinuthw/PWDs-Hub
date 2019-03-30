@@ -58,6 +58,7 @@ class Home extends Component {
   renderPwds = () => {
     const { pwdList } = this.state;
     if (pwdList != []) {
+    console.log(pwdList);
       return pwdList.map((item, index) =>
         <Col lg={6} sm={6} xs={12} key={index}>
           <PwdItem delay={index}

@@ -1,8 +1,7 @@
 export const companyOptions = [
-    "KBANK",
-    "WONGNAI",
-    "YOUTUBE",
-    "Facebook",
+    "บริษัท KX จำกัด",
+    "บริษัท JL จำกัด",
+    "บริษัท AT จำกัด",
 ]
 
 export const provinceOptions = [
@@ -13,7 +12,6 @@ export const provinceOptions = [
 
 
 export const departmentOptions = [
-    "Department A",
-    "Department B",
-    "Department C",
-]
+    "สมาคมสายใยครอบครัว",
+    "บริษัท AT จำกัด",
+]   

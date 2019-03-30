@@ -5,6 +5,6 @@ class QueryManager:
     def getById(json_data, id_key):
         for element in json_data:
             if(json_data[element]['uid'] == id_key):
-                response = data[user]
+                response = json_data[element]
                 return response
         return None

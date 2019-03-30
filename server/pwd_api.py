@@ -21,10 +21,12 @@ def get():
 @app.route("/pwd/id", methods = ['GET'])
 def getByFilter():
     if(request.method == 'GET'):
-        request_data = request.get()
+        user_id = request.form.to_dict()['user_id']
+        response = messager.child("PWD_users").order_by_key().equal_to(user_id).get()
+        return response
 
 #get user by filter (json body)
-@app.route("/pwd/id", methods = ['GET'])
+@app.route("/pwd/filter", methods = ['GET'])
 def getByFilter():
     if(request.method == 'GET'):
         request_data = request.get()       

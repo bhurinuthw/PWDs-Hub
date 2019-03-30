@@ -7,6 +7,8 @@ import {
 } from 'grommet'
 
 import { activityActions } from 'actions';
+import axios from 'axios';
+import { globalConstants } from '_constants';
 
 export class index extends Component {
 
@@ -26,7 +28,24 @@ export class index extends Component {
     this.setState({ eventDescription: event.target.value });
   }
   onAddNewEvent = () => {
-
+    const { authentication } = this.props;
+    const uid = authentication.user.uid;
+    const postData = {
+      "pwd_id": uid,
+      "company_id": "33",
+      "department_id": "4",
+      "description": "wat",
+      "isPrivate": "True",
+      "pic_url": "",
+      "isVerified": "True",
+    }
+    axios.post(globalConstants.DOMAIN_NAME + "activity/create", postData).then(
+      (res) => {
+        console.log(res);
+      }
+    ).catch(err => {
+      console.error(err);
+    })
     this.props.dispatch(activityActions.toggleActivityDialog());
   }
 
@@ -43,8 +62,6 @@ export class index extends Component {
     // return post(url.formData)
     //   .then(response => console.log("result ", response)).catch((err) => alert(err))
   }
-
-
 
   render() {
     const { activity } = this.props;
@@ -92,6 +109,7 @@ export class index extends Component {
 
 const mapStateToProps = (state) => ({
   activity: state.activity,
+  authentication: state.authentication,
 })
 
 export default connect(mapStateToProps)(index);

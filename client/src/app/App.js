@@ -38,7 +38,7 @@ const App = () => (
           <Route exact path="/krai_test" component={Login2} />
 
           {/* <Route component={NotFound} /> */}
-          <Redirect from="*" to="/home/my_flows" />
+          {/* <Redirect from="*" to="/home/my_flows" /> */}
         </Switch>
       </Grommet>
     </Provider>

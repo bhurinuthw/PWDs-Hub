@@ -6,7 +6,11 @@ import {
   Tabs,
   Tab,
   Text, Image,
-  Paragraph
+  Paragraph,
+  Layer,
+  FormField,
+  TextInput,
+  TextArea,
 } from 'grommet';
 
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
@@ -26,16 +30,34 @@ import ActivityDialog from 'components/activity_dialog';
 import { activityActions } from 'actions'
 import { connect } from 'react-redux';
 
-import { timelineItems } from './mockup';
+import { timelineItems as activities } from './mockup';
+import axios from 'axios';
+import { globalConstants } from '_constants';
+
 
 class Timeline extends Component {
 
   state = {
     firstName: 'Phat',
     lastName: 'Thaveepholcharoen',
-    timelineItems: timelineItems,
+    activities: activities,
     isPwd: true,
     isSameDepartment: true,
+    showConfirmDialog: false,
+    indexToVerify: null,
+  }
+
+  componentDidMount = () => {
+    const { authentication } = this.props;
+    const uid = authentication.user.uid
+    axios.get(globalConstants.DOMAIN_NAME + 'activity/id?uid=' + uid).then(
+      (res) => {
+        console.log(res);
+      }
+    ).catch((err) => {
+
+    }
+    )
   }
 
   onAddNewEvent = () => {
@@ -44,6 +66,43 @@ class Timeline extends Component {
 
   onEditProfile = () => {
 
+  }
+
+  onVerifyEvent = (index) => {
+
+    this.setState({
+      showConfirmDialog: true,
+      indexToVerify: index
+    });
+  }
+
+  onConfirmValidateEvent = (indexToVerify) => {
+    const { activities } = this.state;
+    activities[indexToVerify].verified = true;
+    this.setState({ activities, showConfirmDialog: false });
+  }
+
+
+
+  renderValidateEvent = () => {
+    const { showConfirmDialog, indexToVerify } = this.state
+    return (showConfirmDialog &&
+      <Layer
+        onEsc={this.onColseDialog}
+        onClickOutside={this.onColseDialog}>
+        <Box pad="medium" gap="small" width="500px" direction="column">
+          <Heading level={2} margin="none">
+            ยืนยันกิจกรรมนี้
+        </Heading>
+          <Box direction="row" justify="end" align="center" gap="small">
+            <Button label="Ok" primary
+              onClick={() => this.onConfirmValidateEvent(indexToVerify)} />
+            <Button label="Close"
+              onClick={() => this.setState({ showConfirmDialog: false, indexToVerify: null })} />
+          </Box>
+
+        </Box>
+      </Layer>)
   }
 
   renderUserProperties = () => {
@@ -74,24 +133,41 @@ class Timeline extends Component {
 
 
   renderTimelineItems = () => {
-    const { timelineItems, isDepartment } = this.state;
-    return timelineItems.map((item, index) =>
+    const { activities, isSameDepartment } = this.state;
+    return activities.map((item, index) =>
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date={item.date}
         iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
         icon={<Clock color="#fff" />}
       >
-        <h3 className="vertical-timeline-element-title">{item.title}</h3>
-        <h4 className="vertical-timeline-element-subtitle">{item.description}</h4>
-        <Paragraph>
-          {item.description}
-        </Paragraph>
-        {isDepartment && (
-          <div style={{ position: 'absolute', right: 20, bottom: 20, }}>
-            <Button label="Verify" color="accent-5" icon={<Checkmark />} onClick={() => { }} />
-          </div>)
-        }
+        <Box pad={{ vertical: 'medium' }}>
+
+          <Box pad={{ vertical: 'medium' }}>
+            <Image height="150px" src={item.imageUrl} fit="contain" />
+          </Box>
+
+          <h3 className="vertical-timeline-element-title">{item.title}</h3>
+          <h4 className="vertical-timeline-element-subtitle">{item.description}</h4>
+          <Paragraph>
+            {item.description}
+          </Paragraph>
+          {isSameDepartment && (
+            <div style={{ position: 'absolute', right: 20, top: 20, }}>
+              {item.verified == true ?
+                <Box border={{ color: "#509137" }} pad="xsmall"
+                  round={{ size: 'small' }}>
+                  <Text size="small" color="#509137">ยืนยันแล้ว</Text>
+                </Box> :
+                <Box border={{ color: "#F3608D" }} pad="xsmall"
+                  round={{ size: 'small' }}>
+                  <Text size="small" color="#F3608D">รอการยืนยัน</Text>
+                </Box>}
+
+            </div>)
+          }
+        </Box>
+
       </VerticalTimelineElement>)
   }
 
@@ -99,6 +175,7 @@ class Timeline extends Component {
     return (
       <div style={global.mainContainer}>
         <ActivityDialog />
+        {this.renderValidateEvent()}
         <Box direction="row" gap="medium" pad="medium">
           <Box style={{ display: 'flex', flex: 5, flexDirection: 'column' }}>
             <VerticalTimeline>
@@ -134,10 +211,10 @@ class Timeline extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     workflowMyFlows: state.workflowMyFlows,
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    authentication: state.authentication,
+  }
+}
 
-export default connect()(Timeline);
+export default connect(mapStateToProps)(Timeline);

@@ -16,7 +16,7 @@ class Login extends Component {
     super(props);
 
     if (localStorage.getItem('user')) {
-      this.props.history.push('/home/my_flows');
+      this.props.history.push('/home');
     }
 
     this.state = {

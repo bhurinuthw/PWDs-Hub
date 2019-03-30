@@ -45,7 +45,7 @@ class Register extends Component {
       passwordError: null,
 
       roles: ['pwd', 'department', 'company'],
-      role: '',
+      role: 'pwd',
       category: [],
       defectiveOptions: [
         "การมองเห็น",
@@ -135,9 +135,16 @@ class Register extends Component {
 
     this.setState({ passwordError: null, isLoading: true });
 
+    var config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+
     axios.post(globalConstants.DOMAIN_NAME + "register", {
-      email: "overtone00445@gmail.com",
-    }).then(
+      ...userData
+    }, config).then(
       (res) => {
         this.setState({ isLoading: false });
       }).catch(err => {

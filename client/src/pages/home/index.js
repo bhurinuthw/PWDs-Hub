@@ -28,6 +28,9 @@ import { globalConstants } from '_constants';
 
 import axios from 'axios';
 
+import Spinner from 'react-spinkit';
+import { colors } from 'theme';
+
 class Home extends Component {
 
   state = {
@@ -58,13 +61,19 @@ class Home extends Component {
       console.log(pwdList);
       return pwdList.map((item, index) =>
         <Col lg={6} sm={6} xs={12} key={index}>
-          <PwdItem
+          <PwdItem delay={index}
             onClick={() => this.navigateToProfile("1")}
             name={`${item.prefix} ${item.name} ${item.surname}`} description={item.description}
             imgUrl={item.imgUrl} />
         </Col>)
     } else {
-      return null;
+      return (
+        <Box align="center" pad='small'>
+          <Spinner
+            fadeIn="quarter"
+            name="line-scale" color={colors.brand} />
+        </Box>
+      );
     }
 
   }

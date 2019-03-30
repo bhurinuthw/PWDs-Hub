@@ -1,6 +1,7 @@
 from flask import Flask, request, abort, jsonify
 from firebase import firebase
 import datetime
+import requests
 
 app = Flask(__name__)
 
@@ -21,22 +22,30 @@ def get():
 @app.route("/pwd/id", methods = ['GET'])
 def getById():
     if(request.method == 'GET'):
+        data = messager.get("PWD_users",None)
+        #extract body request to get user_id
         user_id = request.form.to_dict()['user_id']
-        response = messager.child("PWD_users").order_by_key().equal_to(user_id).get()
+        res = data[str(user_id)]
+        response = jsonify(res)
         return response
 
 #get user by filter (json body)
 @app.route("/pwd/filter", methods = ['GET'])
 def getByFilter():
     if(request.method == 'GET'):
-        request_data = request.get()       
+        data = messager.get("PWD_users",None)
+        #extract body request to get user_id
+        user_id = request.form.to_dict()['user_id']
+        res = data[str(user_id)]
+        response = jsonify(res)
+        return response    
+
 
 #update user profile (json body)
 @app.route("/pwd/edit", methods = ['PUT'])
 def update():
     if(request.method == 'PUT'):
         pass
-
 
 
 if __name__ == "__main__":

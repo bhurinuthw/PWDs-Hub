@@ -49,6 +49,7 @@ class Authentication:
         db = self.firebase.database()
         user = auth.sign_in_with_email_and_password(email, password)
         uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
+        data['uid'] = uid
         results = db.child("PWD_users").push(data, user['idToken'])
         results = db.child("roles").push('pwd', user['idToken'])
 
@@ -57,6 +58,7 @@ class Authentication:
         db = self.firebase.database()
         user = auth.sign_in_with_email_and_password(email, password)
         uid = auth.get_account_info(user['idToken'])['users'][0]['localId']
+        data['uid'] = uid
         if role == "company":
             results = db.child("Company_users").push(data, user['idToken'])
             results = db.child("roles").push('company', user['idToken'])
@@ -105,13 +107,13 @@ if __name__ == "__main__":
         "role": "pwd"
     }
 
-#     data = {
-#         "name": "ฮ่าๆๆ",
-#         "region": "กลาง",
-#         "province": "กรุงเทพ",
-#         "email": "dep@gmail.com",
-#         "password": "testjha11",
-#         "role": "department"
-#     }
+    data = {
+        "name": "ฮ่าๆๆ",
+        "region": "กลาง",
+        "province": "กรุงเทพ",
+        "email": "dep@gmail.com",
+        "password": "testjha11",
+        "role": "department"
+    }
 
     a.register(data)

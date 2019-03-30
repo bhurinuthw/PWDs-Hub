@@ -18,19 +18,33 @@ import { colors } from 'theme';
 
 import { Scrollbars } from 'react-custom-scrollbars'
 
+import Avatar from 'react-avatar';
+
+import ActivityDialog from 'components/activity_dialog';
+
+import { activityActions } from 'actions'
+import { connect } from 'react-redux';
+
 
 class Timeline extends Component {
 
   state = {
     firstName: 'Phat',
     lastName: 'Thaveepholcharoen',
+    isPwd: true,
   }
+
+  onAddNewEvent = () => {
+    this.props.dispatch(activityActions.toggleActivityDialog());
+  }
+
 
   render() {
     return (
       <div style={global.mainContainer}>
-        <Box direction="row" gap="medium">
-          <Box style={{ display: 'flex', flex: 4, flexDirection: 'column' }}>
+        <ActivityDialog />
+        <Box direction="row" gap="medium" pad={{ vertical: 'medium' }}>
+          <Box style={{ display: 'flex', flex: 5, flexDirection: 'column' }}>
             <VerticalTimeline>
               <VerticalTimelineElement
                 className="vertical-timeline-element--work"
@@ -123,21 +137,27 @@ class Timeline extends Component {
             </VerticalTimeline>
           </Box>
           <Box style={{ display: 'flex', flex: 2, flexDirection: 'column' }}>
-            <Box round={{ size: 'small' }} pad="small">
 
+            <Box round={{ size: 'small' }} gap="small"
+              pad={{ horizontal: 'medium', vertical: 'small' }}
+              background="light-0">
               <Box direction="row" gap="small" align="center">
                 <Box overflow="hidden" round>
-                  <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" />
+                  <Avatar size="48px" name={this.state.firstName}
+                    round src={require('assets/images/autoweb_icon.png')} />
+
+                  {/* <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" /> */}
                 </Box>
-                <Text>{this.state.firstName + "  " + this.state.lastName}</Text>
+                <Text size="large" weight="bold">
+                  {this.state.firstName + "  " + this.state.lastName}
+                </Text>
               </Box>
 
-              <Box pad="medium">
-                <Text>description...........................................
-                    description...........................................
-                    description...........................................
-                  </Text>
-              </Box>
+              <Button label="เพิ่มผลงาน" color="accent-3" onClick={this.onAddNewEvent} />
+
+              {/* <Box pad="medium">
+                <Text>description...........................................</Text>
+              </Box> */}
 
             </Box>
 
@@ -157,4 +177,4 @@ class Timeline extends Component {
 //   }
 // }
 
-export default Timeline;
+export default connect()(Timeline);

@@ -73,7 +73,7 @@ export default class index extends Component {
         <Switch>
           <Route exact path={match.url} component={Home} />
           <Route exact path={match.url + "/my_flows"} component={MyFlows} />
-          <Route exact path={match.url + "/test_image"} component={MyFlows} />
+          <Route exact path={match.url + "/test_image"} component={ImageUploadExample} />
           <Route component={NotFound} />
         </Switch>
       </div>

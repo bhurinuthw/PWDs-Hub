@@ -39,7 +39,7 @@ class Activity:
     def update_activity(self, data):
         pass
 
-
+'''
 data = {
     "pwd_id": "22",
     "company_id": "33",
@@ -53,4 +53,4 @@ data = {
 
 a = Activity()
 a.create_activity(data)
-# a.get_activity('1')
+# a.get_activity('1')'''

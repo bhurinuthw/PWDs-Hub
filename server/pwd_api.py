@@ -1,5 +1,6 @@
 from flask import Flask, request, abort, jsonify
 from firebase import firebase
+from QueryManager import *
 import datetime
 import requests
 
@@ -29,10 +30,7 @@ def getById():
         data = messager.get("PWD_users",None)
         #extract body request to get user_id
         user_id = request.form.to_dict()['user_id']
-        for user in data:
-            if(data[user]['uid'] == user_id):
-                res = data[user]
-                break
+        res = QueryManager.getById(data,user_id)
         #pack to JSON response
         response = jsonify(res)
         response.status_code = 200

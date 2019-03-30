@@ -10,7 +10,7 @@ messager = firebase.FirebaseApplication(url)
 
 #get department by department_id
 @app.route("/department/id", methods = ['GET'])
-def update():
+def getById():
     if(request.method == 'GET'):
         data = messager.get("Department_users",None)
         #extract body request to get user_id

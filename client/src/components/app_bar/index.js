@@ -110,7 +110,7 @@ class AppBar extends Component {
       >
         <Box onClick={() => { }} direction="row" align="center" gap="small" >
           <PlainButton icon={<Menu color={iconColor} />} onClick={() => this.props.onToggleMenu()} />
-          <Text size="xlarge" color='light-0' weight="bold">AutoWeb</Text>
+          <Text size="xlarge" color='light-0' weight="bold">PWDs.hub</Text>
         </Box>
         {this.renderForSignedin()}
 

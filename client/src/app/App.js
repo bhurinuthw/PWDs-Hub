@@ -23,7 +23,8 @@ const App = () => (
     <Provider store={store}>
       <Grommet theme={appTheme} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <Switch>
-          <PrivateRoute path="/home" component={Home} />
+          {/* <PrivateRoute path="/home" component={Home} /> */}
+          <Route path="/home" component={Home} />
           <Route exact path="/" component={Login} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />

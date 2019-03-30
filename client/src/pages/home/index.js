@@ -6,7 +6,7 @@ import AppBar from 'components/app_bar';
 import DropMenuInline from 'components/drop_menu_inline'
 import SideBar from 'components/sidebar';
 
-import { Button, Box, Text } from 'grommet';
+import { Button, Box, Text, Heading } from 'grommet';
 
 import NotFound from 'pages/not_found'
 import MyFlows from 'pages/my_flows';
@@ -14,10 +14,40 @@ import MyFlows from 'pages/my_flows';
 import { Route, Switch } from 'react-router-dom'
 
 import Media from 'react-media'
+import { Row, Col } from 'react-flexbox-grid';
 
 import { history } from '_helpers';
 
-export default class Home extends Component {
+class Home extends Component {
+  render() {
+    return (
+      <div style={global.mainContainer}>
+
+        Home page
+      <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
+          <Row>
+            <Col lg={8} sm={8} xs={12}>
+              {/* <Box direction="row" align="center">
+              <Heading size='small' margin={{ right: 'medium' }}>My Flows</Heading>
+              <Tabs activeIndex={this.state.activeTabIndex} onActive={this.onActiveTab}>
+                <Tab title="Active" />
+                <Tab title="Stopped" />
+              </Tabs>
+            </Box> */}
+            </Col>
+
+            <Col lg={4} sm={4} xs={12}>
+              {/* <Box direction="row" align="center" fill justify="end">
+              <Button label="New Flow" primary icon={<Add />} color="accent-1" onClick={() => this.onCreateFlow()} />
+            </Box> */}
+            </Col>
+          </Row>
+        </Box>
+      </div>);
+  }
+}
+
+export default class index extends Component {
   state = {
     showMenuBar: false,
   }
@@ -36,6 +66,7 @@ export default class Home extends Component {
     return (
       <div style={global.globalContainer}>
         <Switch>
+          <Route exact path={match.url} component={Home} />
           <Route exact path={match.url + "/my_flows"} component={MyFlows} />
           <Route component={NotFound} />
         </Switch>

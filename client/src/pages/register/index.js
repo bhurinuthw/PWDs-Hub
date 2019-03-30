@@ -4,7 +4,7 @@ import {
   Box, FormField, TextInput,
   Button, Image, Tab, Select, Tabs
 } from 'grommet';
-import { UserNew } from 'grommet-icons';
+import { UserNew, Checkmark } from 'grommet-icons';
 import { connect } from 'react-redux'
 import { userActions } from 'actions';
 import { withRouter } from 'react-router-dom';
@@ -68,7 +68,6 @@ class Register extends Component {
     this.setState({ defectiveType: defectiveType });
   }
 
-
   onRegister = () => {
     const { username, email, password, confirmPass } = this.state;
 
@@ -85,9 +84,9 @@ class Register extends Component {
       last_name: 'Anonymouse_lastname',
     };
 
-
     this.setState({ passwordError: null });
-    this.props.dispatch(userActions.register(userInfo))
+    this.props.history.push('/home');
+    // this.props.dispatch(userActions.register(userInfo))
   }
 
   renderTab1Content = () => {
@@ -177,14 +176,10 @@ class Register extends Component {
               {this.renderTab1Content()}
             </Tab>
             <Tab title="หน่วยงาน">
-              <Box fill pad="large" align="center" background="accent-2">
-                {/* <TreeOption size="xlarge" /> */}
-              </Box>
+              1
             </Tab>
             <Tab title="บริษัท">
-              <Box fill pad="large" align="center" background="accent-3">
-                {/* <Car size="xlarge" /> */}
-              </Box>
+              2
             </Tab>
           </Tabs>
 
@@ -210,8 +205,8 @@ class Register extends Component {
 
 
 
-          <Box pad="small" direction="row" justify="end">
-            <Button primary icon={<UserNew />} label="ยืนยัน" onClick={this.onRegister} />
+          <Box pad="small" direction="row" justify="end" >
+            <Button primary icon={<Checkmark />} label="ยืนยัน" onClick={this.onRegister} />
           </Box>
 
 

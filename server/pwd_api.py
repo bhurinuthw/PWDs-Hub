@@ -50,7 +50,6 @@ def getByFilter():
         response.status_code = 200
         return response    
 
-
 #update user profile (json body)
 @app.route("/pwd/edit", methods = ['PUT'])
 def update():

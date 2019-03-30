@@ -2,14 +2,18 @@ import React, { Component, PureComponent } from 'react'
 
 import {
   Box, FormField, TextInput,
-  Button, Image, Tab, Select, Tabs, Text, CheckBox
+  Button, Image, Tab, Tabs, Text, CheckBox,
+  Select,
 } from 'grommet';
 import { UserNew, Checkmark } from 'grommet-icons';
 import { connect } from 'react-redux'
-import { userActions } from 'actions';
 import { withRouter } from 'react-router-dom';
+import Spinner from 'react-spinkit';
+import { colors } from 'theme';
+import axios from 'axios';
 
-import { Row, Col } from 'react-flexbox-grid';
+import { globalConstants } from '_constants'
+
 
 class Option extends PureComponent {
   render() {
@@ -28,27 +32,35 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      n_id: '',
-      prefix: '',
-      name: '',
-      surname: '',
-      phone: '',
-      email: '',
-      password: '',
-      confirmPass: '',
+      isLoading: false,
+
+      n_id: '1111111222',
+      prefix: 'นาย',
+      name: 'พัทธ์',
+      surname: 'ทวีผลเจริญ',
+      phone: '0982235567',
+      email: 'overtone00445@gmail.com',
+      password: 'ot00445',
+      confirmPass: 'ot00445',
       passwordError: null,
 
       roles: ['pwd', 'department', 'company'],
+      role: '',
       category: [],
       defectiveOptions: [
-        'การมองเห็น',
-        'การได้ยิน',
-        'ทางร่างกาย',
-        'ทางจิตใจ',
-        'ทางสติปัญญา',
-        'ทางการเรียนรู้',
-        'ทางออทิสติก'
+        "การมองเห็น",
+        "การได้ยิ้น",
+        "การเคลื่อนไหว",
+        "จิตใจ",
+        "สติปัญญา",
+        "การเรียนรู้",
+        "ออทิสติก"
       ],
+
+      companyName: 'บริษัท 1',
+      companyRegion: 'ภาคกลาง',
+      province: 'กรุงเทพ',
+
     };
   }
 
@@ -70,6 +82,22 @@ class Register extends Component {
   onChangeEmail = (e) => {
     this.setState({ email: e.target.value });
   }
+
+  onChangeCompanyName = (e) => {
+    this.setState({ companyName: e.target.value });
+
+  }
+
+  onChangeCompanyRegion = (e) => {
+    this.setState({ companyRegion: e.target.value });
+
+  }
+
+  onChangeCompanyProvince = (e) => {
+    this.setState({ province: e.target.value });
+  }
+
+
   onChangePassword = (e) => {
     this.setState({ password: e.target.value });
   }
@@ -80,37 +108,43 @@ class Register extends Component {
     // this.props.history.push('/iceyo')
   }
 
-  onChangeDefectiveType = ({ category }) => {
-    console.log(category);
-    this.setState({ category: category });
+  onChangeDefectiveType = (selectedOption) => {
+    this.setState({ category: selectedOption });
   }
 
   setActiveTab = (index) => {
     const role = this.state.roles[index];
-
-
+    this.setState({ role: role });
   }
 
 
   onRegister = () => {
-    const { username, email, password, confirmPass } = this.state;
+    const { n_id, prefix, name,
+      surname, phone, email, password,
+      confirmPass, category, role } = this.state;
 
     if (password !== confirmPass) {
       this.setState({ passwordError: 'Password must be the same' });
       return;
     }
 
-    const userInfo = {
-      username: username,
-      email: email,
-      password: password,
-      first_name: 'Anonymous_firstname',
-      last_name: 'Anonymouse_lastname',
-    };
+    const userData = {
+      n_id, prefix, name, surname, phone, email, password,
+      category
+    }
 
-    this.setState({ passwordError: null });
-    this.props.history.push('/home');
-    // this.props.dispatch(userActions.register(userInfo))
+    this.setState({ passwordError: null, isLoading: true });
+
+    axios.post(globalConstants + "/register", {
+        n_id, prefix, name, surname, phone, email, password,
+        category, role
+    }).then(
+      (res) => {
+        this.setState({ isLoading: false });
+      }).catch(err => {
+        console.error(err);
+        this.setState({ isLoading: false });
+      });
   }
 
   renderTab1Content = () => {
@@ -168,37 +202,84 @@ class Register extends Component {
               ref='phone'
               autoFocus
               placeholder="เบอร์์โทรศัพท์"
-              value={this.state.surname}
+              value={this.state.phone}
               onChange={this.onChangeTelephone} />
           </FormField>
 
           <FormField style={{ display: 'flex', flex: 1 }}>
             <Select
-              multiple
-              placeholder="ประเภทความพิการ"
-              onChange={({ category }) => this.onChangeDefectiveType(category)}
-              value={this.state.category}
-              options={this.state.defectiveOptions} />
-
-            {/* <Select
               size="medium"
               placeholder="ประเภทความพิการ"
               multiple
+              value={this.state.category}
+              options={this.state.defectiveOptions}
               closeOnChange={false}
-              disabledKey="dis"
-              labelKey="lab"
-              valueKey="val"
-              value={category}
-              options={defectiveOptions}
-              onChange={({ category: nextValue }) =>
+              onChange={({ value: nextValue }) =>
                 this.setState({ category: nextValue })
               }
               onClose={() => this.setState({ options: defectiveOptions })}
-            /> */}
+            />
           </FormField>
         </Box>
       </Box>
     );
+  }
+
+  renderTab23Content = () => {
+    return (
+      <Box gap="small">
+        <FormField >
+          <TextInput
+            ref='companyName'
+            autoFocus
+            placeholder="ชื่อบริษัท"
+            value={this.state.companyName}
+            onChange={this.onChangeCompanyName} />
+        </FormField>
+
+        <Box direction="row" gap="small">
+          <FormField >
+            <TextInput
+              ref='companyRegion'
+              autoFocus
+              placeholder="ภาค"
+              value={this.state.companyRegion}
+              onChange={this.onChangeCompanyRegion} />
+          </FormField>
+          <FormField >
+            <TextInput
+              ref='province'
+              autoFocus
+              placeholder="จังหวัด"
+              value={this.state.province}
+              onChange={this.onChangeCompanyProvince} />
+          </FormField>
+        </Box>
+
+        <FormField >
+          <TextInput
+            ref='email'
+            autoFocus
+            placeholder="email"
+            value={this.state.email}
+            onChange={this.onChangeEmail} />
+        </FormField>
+
+      </Box >
+    );
+  }
+
+  renderRegisterButton = () => {
+    const { isLoading } = this.state;
+    if (isLoading) {
+      return <Spinner
+        fadeIn="quarter"
+        name="line-scale" color={colors.brand} />
+    }
+    return (
+      <Button primary
+        icon={<Checkmark />}
+        label="ยืนยัน" onClick={this.onRegister} />)
   }
 
 
@@ -219,10 +300,10 @@ class Register extends Component {
               {this.renderTab1Content()}
             </Tab>
             <Tab title="หน่วยงาน">
-              1
+              {this.renderTab23Content()}
             </Tab>
             <Tab title="บริษัท">
-              2
+              {this.renderTab23Content()}
             </Tab>
           </Tabs>
 
@@ -249,7 +330,7 @@ class Register extends Component {
 
 
           <Box pad="small" direction="row" justify="end" >
-            <Button primary icon={<Checkmark />} label="ยืนยัน" onClick={this.onRegister} />
+            {this.renderRegisterButton()}
           </Box>
 
 

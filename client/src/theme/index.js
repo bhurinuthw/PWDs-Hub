@@ -11,6 +11,7 @@ export const colors = {
   "accent-2": "#E6C84B",
   "accent-3": "#915591",
   "accent-4": '#FF4080',
+  "accent-5": '#F3608D',
   "status-critical": "#F04B37",
   "status-warning": "#F0AA3C",
   "status-ok": "#509137",

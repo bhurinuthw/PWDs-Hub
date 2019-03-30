@@ -39,8 +39,6 @@ export default class SideBar extends Component {
     }
   }
 
-
-
   render() {
     const { showMenuBar, history, location } = this.props;
     const { activeIndex } = this.state;

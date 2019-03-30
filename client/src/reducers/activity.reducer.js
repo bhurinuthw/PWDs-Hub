@@ -1,7 +1,7 @@
 import { activityConstants } from '_constants';
 
 const defaultState = {
-    showActivityDialog: true,
+    showActivityDialog: false,
 }
 
 export function activity(state = defaultState, action) {

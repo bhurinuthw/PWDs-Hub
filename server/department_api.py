@@ -8,16 +8,18 @@ app = Flask(__name__)
 url = 'https://accenture-hackathon-2019-11a52.firebaseio.com/' #firebase db url
 messager = firebase.FirebaseApplication(url)
 
-#register
-@app.route("/department", methods = ['GET'])
-def get():
-    if(request.method == 'GET'):
-        pass
-
-@app.route("/department/update", methods = ['PUT'])
+#get department by department_id
+@app.route("/department/id", methods = ['GET'])
 def update():
-    if(request.method == 'PUT'):
-        pass
+    if(request.method == 'GET'):
+        data = messager.get("Department_users",None)
+        #extract body request to get user_id
+        department_id = request.form.to_dict()['department_id']
+        res = data[str(department_id)]
+        #pack to JSON response
+        response = jsonify(res)
+        response.status_code = 200
+        return response
 
 
 

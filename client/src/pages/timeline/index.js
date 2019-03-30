@@ -45,19 +45,12 @@ class Timeline extends Component {
     isSameDepartment: true,
     showConfirmDialog: false,
     indexToVerify: null,
+    currentUser: null,
   }
 
   componentDidMount = () => {
-    const { authentication } = this.props;
-    const uid = authentication.user.uid
-    axios.get(globalConstants.DOMAIN_NAME + 'activity/id?uid=' + uid).then(
-      (res) => {
-        console.log(res);
-      }
-    ).catch((err) => {
-
-    }
-    )
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.setState({ currentUser: currentUser });
   }
 
   onAddNewEvent = () => {
@@ -83,7 +76,6 @@ class Timeline extends Component {
   }
 
 
-
   renderValidateEvent = () => {
     const { showConfirmDialog, indexToVerify } = this.state
     return (showConfirmDialog &&
@@ -106,31 +98,34 @@ class Timeline extends Component {
   }
 
   renderUserProperties = () => {
+    const { currentUser } = this.state;
+    if (currentUser == null) return;
     return (
       <Box style={{ wordWrap: 'break-word' }}>
-        <p >This is my description bra bra bra.
+        <p >{currentUser.description}
         </p>
-
       </Box>
     );
   }
 
   renderIconAndName = () => {
-    return (
-      <Box direction="row" gap="small" align="center" margin={{ bottom: 'medium' }}>
-        <Box overflow="hidden" round>
-          <Avatar size="48px" name={this.state.firstName}
-            round src={require('assets/images/autoweb_icon.png')} />
+    const { currentUser } = this.state;
+    if (currentUser != null) {
+      return (
+        <Box direction="row" gap="small" align="center" margin={{ bottom: 'small' }}>
+          <Box overflow="hidden" round>
+            <Avatar size="48px" name={this.state.firstName}
+              round src={currentUser.img_url} />
 
-          {/* <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" /> */}
+            {/* <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" /> */}
+          </Box>
+          <Text size="large" weight="bold">
+            {currentUser.name + "  " + currentUser.surname}
+          </Text>
         </Box>
-        <Text size="large" weight="bold">
-          {this.state.firstName + "  " + this.state.lastName}
-        </Text>
-      </Box>
-    );
+      );
+    }
   }
-
 
   renderTimelineItems = () => {
     const { activities, isSameDepartment } = this.state;
@@ -191,9 +186,9 @@ class Timeline extends Component {
               background="light-0">
 
               {this.renderIconAndName()}
+              {this.renderUserProperties()}
               <Button label="เพิ่มผลงาน" color="accent-3" onClick={this.onAddNewEvent} />
               <Button label="แก้ไขข้อมูล" color="accent-3" onClick={this.onEditProfile} />
-              {this.renderUserProperties()}
 
               {/* <Box pad="medium">
                 <Text>description...........................................</Text>

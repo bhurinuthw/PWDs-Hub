@@ -49,22 +49,21 @@ class Home extends Component {
   }
 
 
-  navigateToProfile = (uid) => {
+  navigateToProfile = (user, index) => {
     const { history } = this.props;
-    history.push('/home/timeline/' + uid);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    history.push('/home/timeline/' + index);
   }
 
   renderPwds = () => {
     const { pwdList } = this.state;
-    console.log(pwdList);
     if (pwdList != []) {
-      console.log(pwdList);
       return pwdList.map((item, index) =>
         <Col lg={6} sm={6} xs={12} key={index}>
           <PwdItem delay={index}
-            onClick={() => this.navigateToProfile("1")}
+            onClick={() => this.navigateToProfile(item, index)}
             name={`${item.prefix} ${item.name} ${item.surname}`} description={item.description}
-            imgUrl={item.imgUrl} />
+            imgUrl={item.img_url} department={item.department} />
         </Col>)
     } else {
       return (

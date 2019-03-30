@@ -35,21 +35,21 @@ export default class index extends Component {
                 <FormField style={{ display: 'flex', flex: 1 }}>
                     <Select
                         placeholder="บริษัท"
-                        onChange={({ defectiveType }) => this.onChangeCompanyFilter(defectiveType)}
+                        onChange={(defectiveType) => this.onChangeCompanyFilter(defectiveType)}
                         value={this.state.companyFilter}
                         options={companyOptions} />
                 </FormField>
                 <FormField style={{ display: 'flex', flex: 1 }}>
                     <Select
                         placeholder="จังหวัด"
-                        onChange={({ defectiveType }) => this.onChangeProvinceFilter(defectiveType)}
+                        onChange={(defectiveType) => this.onChangeProvinceFilter(defectiveType)}
                         value={this.state.provinceFilter}
                         options={provinceOptions} />
                 </FormField>
                 <FormField style={{ display: 'flex', flex: 1 }}>
                     <Select
                         placeholder="หน่วยงาน"
-                        onChange={({ defectiveType }) => this.onChangeDepartmentFilter(defectiveType)}
+                        onChange={(defectiveType) => this.onChangeDepartmentFilter(defectiveType)}
                         value={this.state.departmentFilter}
                         options={departmentOptions} />
                 </FormField>

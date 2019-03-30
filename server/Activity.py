@@ -3,6 +3,7 @@ import json
 import requests
 from firebase import firebase
 
+from flask import request
 
 class Activity:
     def __init__(self):

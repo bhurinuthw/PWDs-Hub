@@ -6,12 +6,13 @@ import {
   Tabs,
   Tab,
   Text, Image,
+  Paragraph
 } from 'grommet';
 
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
-import { Add } from 'grommet-icons';
+import { Clock } from 'grommet-icons';
 import { Row, Col } from 'react-flexbox-grid'
 import { global } from 'style';
 import { colors } from 'theme';
@@ -38,6 +39,39 @@ class Timeline extends Component {
     this.props.dispatch(activityActions.toggleActivityDialog());
   }
 
+  onEditProfile = () => {
+
+  }
+
+  renderUserProperties = () => {
+    return (
+      <Box style={{ wordWrap: 'break-word' }}>
+        <p >askdlsakdlakdlsadksadlsakdlsadklsakdlsdklsa
+          asdsaldksalksaldksaldksaldsakdsadsadsdlsa;dlsa;dsald;
+          dladksaldksaldksaldksad
+        </p>
+
+      </Box>
+    );
+  }
+
+  renderIconAndName = () => {
+    return (
+      <Box direction="row" gap="small" align="center" margin={{ bottom: 'medium' }}>
+        <Box overflow="hidden" round>
+          <Avatar size="48px" name={this.state.firstName}
+            round src={require('assets/images/autoweb_icon.png')} />
+
+          {/* <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" /> */}
+        </Box>
+        <Text size="large" weight="bold">
+          {this.state.firstName + "  " + this.state.lastName}
+        </Text>
+      </Box>
+    );
+  }
+
+
 
   render() {
     return (
@@ -50,7 +84,7 @@ class Timeline extends Component {
                 className="vertical-timeline-element--work"
                 date="2011 - present"
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               >
                 <h3 className="vertical-timeline-element-title">Creative Director</h3>
                 <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
@@ -62,7 +96,7 @@ class Timeline extends Component {
                 className="vertical-timeline-element--work"
                 date="2010 - 2011"
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               >
                 <h3 className="vertical-timeline-element-title">Art Director</h3>
                 <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
@@ -74,7 +108,7 @@ class Timeline extends Component {
                 className="vertical-timeline-element--work"
                 date="2008 - 2010"
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               >
                 <h3 className="vertical-timeline-element-title">Web Designer</h3>
                 <h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
@@ -86,7 +120,7 @@ class Timeline extends Component {
                 className="vertical-timeline-element--work"
                 date="2006 - 2008"
                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               >
                 <h3 className="vertical-timeline-element-title">Web Designer</h3>
                 <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
@@ -98,7 +132,7 @@ class Timeline extends Component {
                 className="vertical-timeline-element--education"
                 date="April 2013"
                 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               >
                 <h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
                 <h4 className="vertical-timeline-element-subtitle">Online Course</h4>
@@ -110,7 +144,7 @@ class Timeline extends Component {
                 className="vertical-timeline-element--education"
                 date="November 2012"
                 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               >
                 <h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
                 <h4 className="vertical-timeline-element-subtitle">Certification</h4>
@@ -122,7 +156,7 @@ class Timeline extends Component {
                 className="vertical-timeline-element--education"
                 date="2002 - 2006"
                 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               >
                 <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
                 <h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
@@ -132,28 +166,22 @@ class Timeline extends Component {
               </VerticalTimelineElement>
               <VerticalTimelineElement
                 iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
-                icon={<Add />}
+                icon={<Clock color="#fff" />}
               />
             </VerticalTimeline>
           </Box>
           <Box style={{ display: 'flex', flex: 2, flexDirection: 'column' }}>
 
-            <Box round={{ size: 'small' }} gap="small"
-              pad={{ horizontal: 'medium', vertical: 'small' }}
+            <Box
+              round={{ size: 'small' }}
+              gap="small"
+              pad="medium"
               background="light-0">
-              <Box direction="row" gap="small" align="center">
-                <Box overflow="hidden" round>
-                  <Avatar size="48px" name={this.state.firstName}
-                    round src={require('assets/images/autoweb_icon.png')} />
 
-                  {/* <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" /> */}
-                </Box>
-                <Text size="large" weight="bold">
-                  {this.state.firstName + "  " + this.state.lastName}
-                </Text>
-              </Box>
-
+              {this.renderIconAndName()}
               <Button label="เพิ่มผลงาน" color="accent-3" onClick={this.onAddNewEvent} />
+              <Button label="แก้ไขข้อมูล" color="accent-3" onClick={this.onEditProfile} />
+              {this.renderUserProperties()}
 
               {/* <Box pad="medium">
                 <Text>description...........................................</Text>

@@ -30,6 +30,21 @@ export class index extends Component {
     this.props.dispatch(activityActions.toggleActivityDialog());
   }
 
+  onChangeFile = (e) => {
+    let files = e.target.files;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e) => {
+      console.log("file data: ", e.target.result)
+    }
+
+    // const url = "http://127.0.0.1:8000/api/service"
+    // const formData = { file: e.target.result }
+    // return post(url.formData)
+    //   .then(response => console.log("result ", response)).catch((err) => alert(err))
+  }
+
+
 
   render() {
     const { activity } = this.props;
@@ -56,6 +71,9 @@ export class index extends Component {
                     placeholder="คำอธิบาย"
                     value={this.state.eventDescription}
                     onChange={this.onChangeEventDescription} />
+                </FormField>
+                <FormField>
+                  <input type="file" name="file" onChange={(e) => this.onChangeFile(e)} />
                 </FormField>
               </Box>
 

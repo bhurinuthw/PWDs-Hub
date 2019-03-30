@@ -23,44 +23,61 @@ class ImageUploadExample extends Component {
 
     this.state = {
       email: '',
-      password: '',
+      description: '',
       files: [],
       errors: [],
       image: ''
     };
   }
+  onChangeTextArea = (e) => {
+      console.log(e.target.value)
+      this.setState({ description: e.target.value });
+  }
+
   onChange(e){
       let files = e.target.files;
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload=(e)=>{
-        console.log("image data: ", e.target.result)
+      let reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload=(e)=>{
+      console.log("image data: ", e.target.result)
     }
 
-    const url="http://127.0.0.1:8000/api/service"
-    const formData={file:e.target.result}
-    return post(url.formData)
-    .then(response=>console.log("result ", response)).catch((err)=> alert(err))
-}
+        const url="http://127.0.0.1:8000/api/service"
+        const formData={file:e.target.result}
+        return post(url.formData)
+        .then(response=>console.log("result ", response)).catch((err)=> alert(err))
+    }
   render() {
     return (
         <Box flex direction="column" align="center" justify="center" fill='vertical'>
-            <Box responsive={false} pad='medium' style={{ width: 350 }}
+            <Box responsive={false} pad='large' style={{ width: 500 }}
             round={{ size: 'small' }}
             animation='fadeIn'>
                 <div>
                     <h1>Add Activity</h1>
-                    <input type="file" name="file" onChange={(e)=>this.onChange(e)}/>
+                    <Box justify='center' direction='row' align='center' pad='medium'>
+                        <input type="file" name="file" onChange={(e)=>this.onChange(e)}/>
+                    </Box>
                     <br/>
-                    <TextArea></TextArea>
-                    <div> 
-                        <button>Save</button>
-                        <button>Cancel</button>
-                    </div>
+                    <TextArea
+                        rows="15"
+                        placeholder="Description"
+                        value={this.state.description}
+                        onChange={this.onChangeTextArea}
+                    ></TextArea>
+                    <Box justify='center' direction='row' align='center' pad='medium'>
+                        <Button hoverIndicator onClick={this.onForgot}>
+                            <Text size='Large' weight='bold'>Save /</Text>
+                        </Button>
+                        <Button hoverIndicator style={{ marginLeft: 5 }} onClick={this.onSignup}>
+                            <Text size='medium'>Cancel</Text>
+                        </Button>
+                    </Box>
                 </div>
             </Box>
         </Box>
      
+    
     )
   }
 }

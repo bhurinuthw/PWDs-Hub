@@ -18,13 +18,14 @@ import { Row, Col } from 'react-flexbox-grid';
 
 import { history } from '_helpers';
 
+import PwdFilter from 'components/pwd_filter'
+
 class Home extends Component {
   render() {
     return (
       <div style={global.mainContainer}>
-
-        Home page
-      <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
+        <Box pad={{ horizontal: 'medium' }}>
+          <PwdFilter />
           <Row>
             <Col lg={8} sm={8} xs={12}>
               {/* <Box direction="row" align="center">

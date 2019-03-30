@@ -17,8 +17,6 @@ function login(email, password) {
   return dispatch => {
     dispatch(request({ email }));
 
-
-
     userService.login(email, password).catch(err => {
       console.log(err);
     })

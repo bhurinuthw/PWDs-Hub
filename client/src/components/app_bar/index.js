@@ -122,7 +122,7 @@ class AppBar extends Component {
 const style = {
   position: 'fixed',
   width: '100%',
-  zIndex: 1 ,
+  zIndex: 1,
 }
 
 const mapStateToProps = (state) => {

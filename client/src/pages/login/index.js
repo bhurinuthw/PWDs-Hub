@@ -67,7 +67,8 @@ class Login extends Component {
         <Box responsive={false} pad='medium' style={{ width: 350 }}
           round={{ size: 'small' }}
           animation='fadeIn'>
-          <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" />
+          {/* <Image height="150px" src={require('assets/images/autoweb_icon.png')} fit="contain" /> */}
+          <Text weight="bold" size="large">PWDs.hub</Text>
           <FormField >
             <TextInput
               ref='usernameInput'

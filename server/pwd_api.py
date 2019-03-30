@@ -29,7 +29,10 @@ def getById():
         data = messager.get("PWD_users",None)
         #extract body request to get user_id
         user_id = request.form.to_dict()['user_id']
-        res = data[str(user_id)]
+        for user in data:
+            if(data[user]['uid'] == user_id):
+                res = data[user]
+                break
         #pack to JSON response
         response = jsonify(res)
         response.status_code = 200

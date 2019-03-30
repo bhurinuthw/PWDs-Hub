@@ -91,29 +91,3 @@ class Authentication:
             "province": data["province"],
         }
         return data
-
-if __name__ == "__main__":
-    a = Authentication()
-
-    data = {
-        "n_id": "12345678",
-        "prefix": "นาย",
-        "name": "สวัสดี",
-        "surname": "ครับ",
-        "phone": "0811111111",
-        "email": "pwd1@gmail.com",
-        "category": ["ตาบอด", "หูหนวก"],
-        "password": "testjha11",
-        "role": "pwd"
-    }
-
-    data = {
-        "name": "ฮ่าๆๆ",
-        "region": "กลาง",
-        "province": "กรุงเทพ",
-        "email": "dep@gmail.com",
-        "password": "testjha11",
-        "role": "department"
-    }
-
-    a.register(data)

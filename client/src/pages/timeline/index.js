@@ -112,7 +112,7 @@ class Timeline extends Component {
     const { currentUser } = this.state;
     if (currentUser != null) {
       return (
-        <Box direction="row" gap="small" align="center" margin={{ bottom: 'small' }}>
+        <Box direction="row" gap="small" align="center" >
           <Box overflow="hidden" round>
             <Avatar size="48px" name={this.state.firstName}
               round src={currentUser.img_url} />

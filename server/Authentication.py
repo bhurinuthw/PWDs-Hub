@@ -2,6 +2,7 @@ import pyrebase
 import json
 import requests
 
+from flask import request
 
 class Authentication:
     def __init__(self):
@@ -27,6 +28,7 @@ class Authentication:
             print(error['message'])
 
     def register(self, data):
+        print(type(request.get_json(silent=True)))
         auth = self.firebase.auth()
         email = data["email"]
         password = data["password"]

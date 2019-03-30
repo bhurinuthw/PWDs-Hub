@@ -15,10 +15,7 @@ def getById():
         data = messager.get("Company_users",None)
         #extract body request to get user_id
         company_id = request.form.to_dict()['company_id']
-        for company in data:
-            if(data[company]['uid'] == company_id):
-                res = data[company]
-                break
+        res = QueryManager.getById(data,company_id)
         #pack to JSON response
         response = jsonify(res)
         response.status_code = 200

@@ -59,7 +59,8 @@ class Home extends Component {
     const { pwdList, company } = this.state;
     const views = [];
     const pwdKeys = Object.keys(pwdList);
-    for (let key of pwdKeys) {
+    for (let index in pwdKeys) {
+      const key = pwdKeys[index];
       const item = pwdList[key];
       if (company == null || item.company === company) {
         views.push(<Col lg={6} sm={6} xs={12} key={index}>

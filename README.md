@@ -11,11 +11,11 @@
 
 # AUTHORS AND PROGRAMMER
 
-  Bhurinuth Wongsrisakul (<github.com/Poom1997>) - Back-End Developer, DevOps  <br>
-  Krai Chamnivikaipong (<github.com/utimateman>) - Front-End Developer  <br>
-  Pakpoom Kunalittipol (<github.com/iceyokuna>) - Back-End Developer  <br>
-  Parin Kobboon (<github.com/punparin>) - Back-End Developer  <br>
-  Phat Taveepolchaoren (<github.com/bas00445>) - Front-End Developer  <br> 
+  Bhurinuth Wongsrisakul (https://www.github.com/Poom1997) - Back-End Developer, DevOps  <br>
+  Krai Chamnivikaipong (https://www.github.com/utimateman) - Front-End Developer  <br>
+  Pakpoom Kunalittipol (https://www.github.com/iceyokuna) - Back-End Developer  <br>
+  Parin Kobboon (https://www.github.com/punparin) - Back-End Developer  <br>
+  Phat Taveepolchaoren (https://www.github.com/bas00445) - Front-End Developer  <br> 
 
 # INITIAL DESCRIPTION
 
@@ -31,4 +31,4 @@
 # 
 **PROGRAM VERSION: 1.0.0<br>**
 
-THIS DOCUMENT IS EDITED AS-OF 30 MARCH 2019<br>
+THIS DOCUMENT IS EDITED AS-OF 31 MARCH 2019<br>

@@ -24,6 +24,8 @@ import PwdFilter from 'components/pwd_filter';
 import PwdItem from 'components/collaborator_item';
 import { pwds } from './mockup'
 
+import firebase from 'firebase';
+
 import { globalConstants } from '_constants';
 
 import axios from 'axios';
@@ -39,13 +41,11 @@ class Home extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(globalConstants.DOMAIN_NAME + "pwd").then(
-      (res) => {
-        this.setState({ pwdList: res.data, isLoading: false });
-      }).catch((err) => {
-        console.error(err);
-        this.setState({ isLoading: false });
-      })
+    this.setState({ isLoading: true });
+    const ref = firebase.database().ref('/PWD_users');
+    ref.on("value", (snapshot) => {
+      this.setState({ pwdList: snapshot.val(), isLoading: false });
+    })
   }
 
 
@@ -57,20 +57,22 @@ class Home extends Component {
 
   renderPwds = () => {
     const { pwdList, company } = this.state;
-    if (pwdList != []) {
-      return pwdList.map((item, index) => {
-        if (company == null || item.company === company) {
-          return (<Col lg={6} sm={6} xs={12} key={index}>
-            <PwdItem delay={index}
-              onClick={() => this.navigateToProfile(item, index)}
-              name={`${item.prefix} ${item.name} ${item.surname}`} description={item.description}
-              imgUrl={item.img_url} department={item.department} />
-          </Col>);
-        }
-      })
-    } else {
+    const views = [];
+    const pwdKeys = Object.keys(pwdList);
+    for (let key of pwdKeys) {
+      const item = pwdList[key];
+      if (company == null || item.company === company) {
+        views.push(<Col lg={6} sm={6} xs={12} key={index}>
+          <PwdItem delay={index}
+            onClick={() => this.navigateToProfile(item, index)}
+            name={`${item.prefix} ${item.name} ${item.surname}`} description={item.description}
+            imgUrl={item.img_url} department={item.department} />
+        </Col>);
+      }
+    }
+    if (views.length == 0) {
       return (
-        <Box align="center" pad='small'>
+        <Box align="center" pad='small' fill="horizontal">
           <Spinner
             fadeIn="quarter"
             name="line-scale" color={colors.brand} />
@@ -78,6 +80,7 @@ class Home extends Component {
       );
     }
 
+    return views;
   }
 
 

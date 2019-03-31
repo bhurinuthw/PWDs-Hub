@@ -49,51 +49,54 @@ class AppBar extends Component {
   }
 
   renderForSignedin() {
-    const { user } = this.props;
-    if (user == null) return null;
-    else {
-      const { openNotificationPanel, openAccountPanel } = this.state;
-      return (
-        <Box direction="row" gap='small'>
-          <DropButton
-            dropAlign={{ top: "bottom", right: "right" }}
-            open={openNotificationPanel}
-            onClose={() => this.setState({ openNotificationPanel: undefined })}
-            dropContent={
-              <DropContent
-                title="Notifications"
-                items={[{ label: 'Notification#1' }, { label: 'Notification#2' }, { label: 'Notification#3' }]}
-                onSelect={this.onSelectNotification}
-                onClose={this.onCloseDropdown} />}
-          >
-            <PlainButton icon={<Notification color={iconColor} />} />
-          </DropButton>
-
-          <DropButton
-            dropAlign={{ top: "bottom", right: "right" }}
-            open={openAccountPanel}
-            onClose={() => this.setState({ openAccountPanel: undefined })}
-            dropContent={
-              <DropContent
-                title={user.username}
-                items={[{ label: 'Account Setting' }, { label: 'Logout' }]}
-                onSelect={this.onSelectAccountPanel}
-                onClose={this.onCloseDropdown} />}
-          >
-
-            <Media query="(min-width: 599px)">
-              {matches =>
-                matches ? (
-                  <PlainButton icon={<User color={iconColor} />} label={user.username} />
-                ) : (
-                    <PlainButton icon={<User color={iconColor} />} />
-                  )
-              }
-            </Media>
-
-          </DropButton>
-        </Box>);
+    const { userObject } = this.props;
+    let user = userObject || null;
+    if (user == null) {
+      user = {};
+      user.username = "Admin";
     }
+
+    const { openNotificationPanel, openAccountPanel } = this.state;
+    return (
+      <Box direction="row" gap='small'>
+        <DropButton
+          dropAlign={{ top: "bottom", right: "right" }}
+          open={openNotificationPanel}
+          onClose={() => this.setState({ openNotificationPanel: undefined })}
+          dropContent={
+            <DropContent
+              title="Notifications"
+              items={[{ label: 'Notification#1' }, { label: 'Notification#2' }, { label: 'Notification#3' }]}
+              onSelect={this.onSelectNotification}
+              onClose={this.onCloseDropdown} />}
+        >
+          <PlainButton icon={<Notification color={iconColor} />} />
+        </DropButton>
+
+        <DropButton
+          dropAlign={{ top: "bottom", right: "right" }}
+          open={openAccountPanel}
+          onClose={() => this.setState({ openAccountPanel: undefined })}
+          dropContent={
+            <DropContent
+              title={user.username}
+              items={[{ label: 'Account Setting' }, { label: 'Logout' }]}
+              onSelect={this.onSelectAccountPanel}
+              onClose={this.onCloseDropdown} />}
+        >
+
+          <Media query="(min-width: 599px)">
+            {matches =>
+              matches ? (
+                <PlainButton icon={<User color={iconColor} />} label={user.username} />
+              ) : (
+                  <PlainButton icon={<User color={iconColor} />} />
+                )
+            }
+          </Media>
+
+        </DropButton>
+      </Box>);
   }
 
   render() {

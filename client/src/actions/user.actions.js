@@ -17,47 +17,27 @@ function login(email, password) {
   return dispatch => {
     dispatch(request({ email }));
 
-    userService.login(email, password).catch(err => {
-      console.log(err);
-    })
+    // userService.login(email, password).catch(err => {
+    //   console.log(err);
+    // })
 
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        dispatch(success(user));
-        user = JSON.stringify(user);
-        localStorage.setItem('user', user);
-        history.push('/home/timeline/1');
-      } else {
-        // No user is signed in.
-      }
-    });
+    // firebase.auth().onAuthStateChanged(function (user) {
+    //   if (user) {
+    //     // User is signed in.
+    //     dispatch(success(user));
+    //     user = JSON.stringify(user);
+    //     localStorage.setItem('user', user);
+    //     history.push('/home/timeline/1');
+    //   } else {
+    //     // No user is signed in.
+    //   }
+    // });
 
+    setTimeout(() => {
+      dispatch(success({}));
+      history.push('/home/timeline/1');
+    }, 1000);
 
-
-    // userService.login(email, password)
-    //   .then(
-    //     res => {
-    //       console.log(res);
-    //       let user = res.data;
-    //       dispatch(success(user));
-    //       user = JSON.stringify(user);
-    //       localStorage.setItem('user', user);
-    //       history.push('/test_component');
-    //     },
-    //     error => {
-    //       dispatch(failure(error.toString()));
-    //       dispatch(alertActions.error(error.toString()));
-    //     }
-    //   );
-
-    // Fake login
-    // setTimeout(() => {
-    //   const token = 1234788989
-    //   localStorage.setItem('user', token);
-    //   dispatch(success(token));
-    //   history.push('/home/my_flows');
-    // }, 500)
 
   };
 

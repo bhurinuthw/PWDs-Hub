@@ -1,5 +1,5 @@
 # INTRODUCTION
-
+  ## Winner of the Accenture Hackathon 2019<br>
   This program is created for <br>
   Accenture Hackathon 2019 (30 March 2019)<br>
 
@@ -25,7 +25,7 @@
 
 
 # ADDITIONAL DESCRIPTION
-
+  <b><i>Winner of the 2019 Accenture Hackathon</i></b><br>
   Uses Node.js and Flask with Firebase
 
 # 

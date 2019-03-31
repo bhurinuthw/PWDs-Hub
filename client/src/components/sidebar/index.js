@@ -70,7 +70,7 @@ export default class SideBar extends Component {
                   <PlainButton hoverIndicator
                     color="light-0"
                     background={activeIndex == 1 ? "light-4" : "default"}
-                    onClick={() => this.handleSelectMenu('timeline/1', 1)}
+                    onClick={() => this.handleSelectMenu('/timeline/1', 1)}
                     label="Timeline" />
                 </Box>
               </Box>
